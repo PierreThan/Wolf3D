@@ -29,6 +29,7 @@
 
 // https://lodev.org/cgtutor/raycasting.html
 // https://zestedesavoir.com/tutoriels/1014/utiliser-la-sdl-en-langage-c/la-sdl/#1-presentation-de-la-sdl
+// http://forums.mediabox.fr/wiki/tutoriaux/flashplatform/affichage/3d/raycasting/theorie/01-introduction
 // https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/
 
 typedef struct	s_wolf
