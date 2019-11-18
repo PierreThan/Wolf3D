@@ -19,7 +19,7 @@
 # include "key_macos.h"
 # include "structures.h"
 # include <stdlib.h>
-#include <SDL2/SDL.h>
+# include <SDL2/SDL.h>
 
 # define WIN_WIDTH 1200
 # define WIN_HEIGHT 900
@@ -29,6 +29,7 @@
 
 // https://lodev.org/cgtutor/raycasting.html
 // https://zestedesavoir.com/tutoriels/1014/utiliser-la-sdl-en-langage-c/la-sdl/#1-presentation-de-la-sdl
+// https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/
 
 typedef struct	s_wolf
 {

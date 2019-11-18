@@ -47,6 +47,7 @@ typedef struct	s_player
 {
 	t_vec2d		pos;
 	t_vec2d		dir;
+	t_vec2d		plane;
 }				t_player;
 
 #endif
