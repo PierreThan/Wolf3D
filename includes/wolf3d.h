@@ -14,16 +14,14 @@
 #ifndef RTV1_H
 # define RTV1_H
 
-# include <pthread.h>
 # include <math.h>
 # include "key_macos.h"
 # include "structures.h"
 # include <stdlib.h>
-# include <SDL2/SDL.h>
+# include <mlx.h>
 
-# define WIN_WIDTH 1200
-# define WIN_HEIGHT 900
-# define PTHREADS 12
+# define WIDTH 1200
+# define HEIGHT 900
 # define WHITE 0xFFFFFF
 # define BLUE 0x1152CB
 
@@ -34,9 +32,33 @@
 
 typedef struct	s_wolf
 {
+	int			fd;
+	int			height;
+	int			width;
+	char		**map;
     t_player    player;
 	t_mlx		mlx;
 }				t_wolf;
+
+/*
+**		input_check.c
+*/
+int				parse_file(t_wolf *wolf, char **argv);
+
+/*
+**		mlx.c
+*/
+void			ft_display_window(char *title, t_wolf *wolf);
+void			setup_controls(t_wolf *wolf);
+
+/*
+**		vector2d.c
+*/
+t_vec2d			*vec2d_scalar_mult(t_vec2d a, double l);
+double			vect2d_dot(t_vec2d a, t_vec2d b);
+t_vec2d			*vec2d_sum(t_vec2d a, t_vec2d b);
+void			vec2d_normalize(t_vec2d *vect);
+void			vec2d_mat2d_mult(t_vec2d *vec, t_mat2d *mat);
 
 /*
 int				key_press(int key, void *param);
