@@ -1,6 +1,6 @@
 #include "../includes/wolf3d.h"
 
-t_vec2d	*vec2d_create(double x, double y)
+t_vec2d		*vec2d_create(double x, double y)
 {
 	t_vec2d	*vect;
 
@@ -11,7 +11,7 @@ t_vec2d	*vec2d_create(double x, double y)
 	return (vect);
 }
 
-t_vec2d	*vec2d_scalar_mult(t_vec2d a, double l)
+t_vec2d		*vec2d_scalar_mult(t_vec2d a, double l)
 {
 	t_vec2d	*vect;
 
@@ -24,13 +24,13 @@ t_vec2d	*vec2d_scalar_mult(t_vec2d a, double l)
 
 double		vect2d_dot(t_vec2d a, t_vec2d b)
 {
-	double		res;
+	double	res;
 
 	res = (a.x * b.x) + (a.y * b.y);
 	return (res);
 }
 
-t_vec2d	*vec2d_sum(t_vec2d a, t_vec2d b)
+t_vec2d		*vec2d_sum(t_vec2d a, t_vec2d b)
 {
 	t_vec2d	*vect;
 
