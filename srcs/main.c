@@ -30,10 +30,7 @@ int			free_wolf(t_wolf *wolf)
 		if (wolf->map)
 		{
 			while (wolf->map[i])
-			{
-				ft_strdel(&(wolf->map[i]));
-				i++;
-			}
+				ft_strdel(&(wolf->map[i++]));
 			ft_memdel((void **)(&(wolf->map)));
 		}
 	}
