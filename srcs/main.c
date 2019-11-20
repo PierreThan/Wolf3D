@@ -24,7 +24,6 @@ int			free_wolf(t_wolf *wolf)
 		if (wolf->mlx.mlx_ptr)
 		{
 			mlx_destroy_image(wolf->mlx.mlx_ptr, wolf->mlx.img.ptr);
-			free(&wolf->mlx.img);
 			mlx_destroy_window(wolf->mlx.mlx_ptr, wolf->mlx.win_ptr);
 		}
 		if (wolf->map)
