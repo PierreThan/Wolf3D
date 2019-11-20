@@ -6,8 +6,13 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2019/11/20 14:46:39 by atyczyns         ###   ########.fr       */
+/*   Updated: 2019/11/20 15:55:32 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
+
+void	ray_casting(t_wolf *wolf)
+{
+	
+}

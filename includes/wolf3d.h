@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 17:50:40 by pthan             #+#    #+#             */
-/*   Updated: 2019/11/20 11:49:26 by atyczyns         ###   ########.fr       */
+/*   Updated: 2019/11/20 15:00:36 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <stdlib.h>
 # include <mlx.h>
 
-# define WIDTH 1200
-# define HEIGHT 900
+# define WIDTH 320
+# define HEIGHT 200
 # define WHITE 0xFFFFFF
 # define BLUE 0x1152CB
 

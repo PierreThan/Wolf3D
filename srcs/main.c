@@ -46,8 +46,10 @@ int			main(int ac, char **argv)
 		return (free_wolf(&wolf));
 	if (inti_mlx(wolf) == 0)
 		return (free_wolf(&wolf));
-	ray_casting(wolf);
-	setup_mlx_ctrls(wolf);
+	// faire tableau --> grille avec bloc 64x64(x64);
+	//init_grid(&wolf);
+	ray_casting(&wolf);
+	setup_mlx_ctrls(&wolf);
 	mlx_loop(wolf.mlx.mlx_ptr);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 13:29:49 by pthan             #+#    #+#             */
-/*   Updated: 2019/11/15 13:29:52 by pthan            ###   ########.fr       */
+/*   Updated: 2019/11/20 15:05:05 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,15 @@ typedef struct	s_player
 	t_vec2d		dir;
 	t_vec2d		plane;
 }				t_player;
+
+typedef struct	s_wolf
+{
+	int			fd;
+	int			height;
+	int			width;
+	char		**map;
+    t_player    player;
+	t_mlx		mlx;
+}				t_wolf;
 
 #endif
