@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 17:50:40 by pthan             #+#    #+#             */
-/*   Updated: 2019/11/20 15:00:36 by atyczyns         ###   ########.fr       */
+/*   Updated: 2019/11/20 16:03:51 by pthan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include "key_macos.h"
 # include "structures.h"
+# include "../libft/includes/libft.h"
 # include <stdlib.h>
 # include <mlx.h>
 
@@ -27,19 +28,8 @@
 # define BLUE 0x1152CB
 
 // https://lodev.org/cgtutor/raycasting.html
-// https://zestedesavoir.com/tutoriels/1014/utiliser-la-sdl-en-langage-c/la-sdl/#1-presentation-de-la-sdl
 // http://forums.mediabox.fr/wiki/tutoriaux/flashplatform/affichage/3d/raycasting/theorie/01-introduction
 // https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/
-
-typedef struct	s_wolf
-{
-	int			fd;
-	int			height;
-	int			width;
-	char		**map;
-    t_player    player;
-	t_mlx		mlx;
-}				t_wolf;
 
 /*
 **		input_check.c
