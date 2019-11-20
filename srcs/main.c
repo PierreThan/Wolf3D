@@ -23,11 +23,9 @@ int			free_wolf(t_wolf *wolf)
 	{
 		if (wolf->mlx.mlx_ptr)
 		{
-			if (wolf->mlx.img.ptr)
-				mlx_destroy_image(wolf->mlx, wolf->mlx.img.ptr);
-			if (wolf->mlx.win_ptr)
-				mlx_destroy_window(wolf->mlx, wolf->mlx.win_ptr);
-			ft_memdel(wolf->mlx.mlx_ptr);
+			mlx_destroy_image(wolf->mlx.mlx_ptr, wolf->mlx.img.ptr);
+			free(&wolf->mlx.img);
+			mlx_destroy_window(wolf->mlx.mlx_ptr, wolf->mlx.win_ptr);
 		}
 		if (wolf->map)
 		{

@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 17:50:40 by pthan             #+#    #+#             */
-/*   Updated: 2019/11/18 17:50:43 by pthan            ###   ########.fr       */
+/*   Updated: 2019/11/20 11:49:26 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define RTV1_H
 
 # include <math.h>
+# include <fcntl.h>
 # include "key_macos.h"
 # include "structures.h"
 # include <stdlib.h>
