@@ -24,6 +24,8 @@
 
 # define WIDTH 320
 # define HEIGHT 200
+# define FT_MIN(A, B) (((A) < (B)) ? (A) : (B))
+# define FT_MAX(A, B) (((A) > (B)) ? (A) : (B))
 # define WHITE 0xFFFFFF
 # define BLUE 0x1152CB
 

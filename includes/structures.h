@@ -50,6 +50,29 @@ typedef struct	s_player
 	t_vec2d		plane;
 }				t_player;
 
+typedef struct	s_ray
+{
+	int			mapX;
+	int			mapY;
+	int			hit;
+	int			stepX;
+	int			stepY;
+	int			side;
+	double		perpWallDist;
+	t_vec2d		pos;
+	t_vec2d		dir;
+	t_vec2d		sideDist;
+	t_vec2d		deltaDist;
+	t_vec2d		end_in_map;
+}				t_ray;
+
+typedef struct	s_wall
+{
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+}				t_wall;
+
 typedef struct	s_wolf
 {
 	int			fd;

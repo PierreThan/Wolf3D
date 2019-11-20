@@ -92,6 +92,10 @@ int		init_player(t_wolf *wolf)
 			{
 				wolf->player.pos.x = i;
 				wolf->player.pos.y = j;
+				wolf->player.dir.x = 1;
+				wolf->player.dir.y = 0;
+				wolf->player.plane.x = 0;
+				wolf->player.plane.y = 0.66;
 				return (1);
 			}
 			j++;
