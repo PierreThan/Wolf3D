@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2019/12/04 15:33:33 by atyczyns         ###   ########.fr       */
+/*   Updated: 2019/12/04 16:06:22 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,14 @@ void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 	if (wall->draw_end >= HEIGHT)
 		wall->draw_end = HEIGHT - 1;
 	//PARTIE MLX
-	//il faut rajouter a la structure wall un "ID" pour les murs ainsi que des couleur
-	//et rajouter un fichier avec les BITMAP du mur, du sol et du ciel
+	/*il faut rajouter a la structure wall un "ID" pour les murs ainsi que des couleur
+	et rajouter un fichier avec les BITMAP du mur, du sol et du ciel
+	
+	il faut initier wolf->x_texture ici
+	
 	while (wall->draw_start < wall->draw_end)
 		put_pxl_to_img(wolf, x, wall->draw_start++, wolf->color);
+	*/
 }
 
 void		ray_casting(t_wolf *wolf)

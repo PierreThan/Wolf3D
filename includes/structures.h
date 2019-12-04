@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 13:29:49 by pthan             #+#    #+#             */
-/*   Updated: 2019/12/04 15:33:56 by atyczyns         ###   ########.fr       */
+/*   Updated: 2019/12/04 15:59:12 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,20 @@ typedef struct	s_wall
 	int			draw_end;
 }				t_wall;
 
+typedef struct	s_texture
+{
+	void		*img;
+	char		*data;
+	int			bpp;
+	int			sizeline;
+	int			endian;
+}				t_texture;
+
 typedef struct	s_wolf
 {
+	t_texture	texture;
+	int			x_texture;
+	int			y_texture;
 	int			color;
 	int			fd;
 	int			height;
