@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2019/11/20 15:55:32 by atyczyns         ###   ########.fr       */
+/*   Updated: 2019/12/04 15:33:33 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		sending_laser_beam(t_wolf *wolf, t_ray *ray)
 	}
 }
 
-void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall)
+void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 {
 	if (ray->side == 0)
 		ray->perpWallDist = (ray->mapX - ray->pos.x + (ray->stepX < 0)) / ray->dir.x;
@@ -71,6 +71,10 @@ void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall)
 	if (wall->draw_end >= HEIGHT)
 		wall->draw_end = HEIGHT - 1;
 	//PARTIE MLX
+	//il faut rajouter a la structure wall un "ID" pour les murs ainsi que des couleur
+	//et rajouter un fichier avec les BITMAP du mur, du sol et du ciel
+	while (wall->draw_start < wall->draw_end)
+		put_pxl_to_img(wolf, x, wall->draw_start++, wolf->color);
 }
 
 void		ray_casting(t_wolf *wolf)
@@ -85,6 +89,6 @@ void		ray_casting(t_wolf *wolf)
 	{
 		init_ray(wolf, &ray, x, cam_x);
 		sending_laser_beam(wolf, &ray);
-		draw_wall(wolf, &ray, &wall);
+		draw_wall(wolf, &ray, &wall, x);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 17:50:40 by pthan             #+#    #+#             */
-/*   Updated: 2019/11/20 16:03:51 by pthan            ###   ########.fr       */
+/*   Updated: 2019/12/04 15:14:02 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ double			vect2d_dot(t_vec2d a, t_vec2d b);
 t_vec2d			*vec2d_sum(t_vec2d a, t_vec2d b);
 void			vec2d_normalize(t_vec2d *vect);
 void			vec2d_mat2d_mult(t_vec2d *vec, t_mat2d *mat);
+
+/*
+**		draw_textures.c
+*/
+void			put_pxl_to_img(t_wolf *wolf, int x, int y, int color);
 
 /*
 int				key_press(int key, void *param);

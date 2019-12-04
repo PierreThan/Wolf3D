@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 13:29:49 by pthan             #+#    #+#             */
-/*   Updated: 2019/11/20 15:05:05 by atyczyns         ###   ########.fr       */
+/*   Updated: 2019/12/04 15:33:56 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct	s_wall
 
 typedef struct	s_wolf
 {
+	int			color;
 	int			fd;
 	int			height;
 	int			width;
