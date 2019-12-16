@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= fractol
+NAME			= wolf
 LIB				= ./libft/
 LDFLAGS			= -Llibft
 LDLIBS			= -lft

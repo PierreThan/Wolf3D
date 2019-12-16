@@ -23,6 +23,7 @@ static int	check_input(int ac, char **argv, t_wolf *wolf)
 		}
 		return (parse_file(wolf, argv));
 	}
+	ft_printf("usage error");
 	return (0);
 }
 
@@ -48,20 +49,37 @@ int			free_wolf(t_wolf *wolf)
 	return (0);
 }
 
+void		init_wolf(t_wolf *wolf)
+{
+	wolf->x_texture = 0;
+	wolf->y_texture = 0;
+	wolf->color = 0;
+	wolf->fd = 0;
+	wolf->height = 0;
+	wolf->width = 0;
+	wolf->player.pos.x = 0;
+	wolf->player.pos.y = 0;
+	wolf->player.dir.x = 0;
+	wolf->player.dir.y = 0;
+	wolf->player.plane.x = 0;
+	wolf->player.plane.y = 0;
+}
+
 int			main(int ac, char **argv)
 {
 	t_wolf	wolf;
 
 	// verifier check_input, free_wolf et init_mlx
 	// faire le raycasting puis les hooks
+	init_wolf(&wolf);
 	if (check_input(ac, argv, &wolf) == 0)
 		return (free_wolf(&wolf));
-	if (inti_mlx(wolf) == 0)
+	if (ft_display_window("wolf", &wolf) == 0)
 		return (free_wolf(&wolf));
 	// faire tableau --> grille avec bloc 64x64(x64);
 	//init_grid(&wolf);
-	//ray_casting(&wolf);
-	//setup_mlx_ctrls(&wolf);
+	ray_casting(&wolf);
+	setup_controls(&wolf);
 	mlx_loop(wolf.mlx.mlx_ptr);
 	return (0);
 }

@@ -43,8 +43,6 @@ t_vec2d		*vec2d_sum(t_vec2d a, t_vec2d b)
 
 void		vec2d_normalize(t_vec2d *vect)
 {
-	double	max;
-
 	if (vect->x >= vect->y)
 	{
 		vect->y /= vect->x;

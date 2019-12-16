@@ -14,12 +14,12 @@
 
 //a proteger -> verifier les retours des fncs mlx
 
-void	ft_display_window(char *title, t_wolf *wolf)
+int		ft_display_window(char *title, t_wolf *wolf)
 {
 	if ((wolf->mlx.mlx_ptr = mlx_init()))
 	{
-		if (wolf->mlx.win_ptr = mlx_new_window(wolf->mlx.mlx_ptr,
-			WIDTH, HEIGHT, title))
+		if ((wolf->mlx.win_ptr = mlx_new_window(wolf->mlx.mlx_ptr,
+			WIDTH, HEIGHT, title)))
 		{
 			if ((wolf->mlx.img.ptr =
 					mlx_new_image(wolf->mlx.mlx_ptr, WIDTH, HEIGHT)))
@@ -27,11 +27,13 @@ void	ft_display_window(char *title, t_wolf *wolf)
 				wolf->mlx.img.data = (int*)mlx_get_data_addr(
 					wolf->mlx.img.ptr, &(wolf->mlx.img.bpp),
 					&(wolf->mlx.img.size_l), &(wolf->mlx.img.endian));
-				return ;
+				return (1);
 			}
+			return (0);
 		}
+		return (0);
 	}
-	free_mlx(wolf);
+	return (0);
 }
 
 int		close_wolf(void *param)
@@ -45,14 +47,15 @@ int		key_press(int key, void *param)
 {
 	t_wolf *wolf;
 
+	ft_printf("key pressed = %d\n", key);
 	wolf = (t_wolf *)param;
 	if (key == MAIN_PAD_ESC)
 		exit(0);
-	else if (key == ARROW_UP || key == ARROW_DOWN)
+/*	else if (key == ARROW_UP || key == ARROW_DOWN)
 		move(key, wolf);
 	else if (key == ARROW_LEFT || key == ARROW_RIGHT)
 		rotate(key, wolf);
-	return (0);
+*/	return (0);
 }
 
 void	setup_controls(t_wolf *wolf)

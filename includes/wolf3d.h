@@ -22,8 +22,8 @@
 # include <stdlib.h>
 # include <mlx.h>
 
-# define WIDTH 320
-# define HEIGHT 200
+# define WIDTH 640
+# define HEIGHT 400
 # define FT_MIN(A, B) (((A) < (B)) ? (A) : (B))
 # define FT_MAX(A, B) (((A) > (B)) ? (A) : (B))
 # define WHITE 0xFFFFFF
@@ -34,6 +34,11 @@
 // https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/
 
 /*
+**		main.c
+*/
+int				free_wolf(t_wolf *wolf);
+
+/*
 **		input_check.c
 */
 int				parse_file(t_wolf *wolf, char **argv);
@@ -41,7 +46,7 @@ int				parse_file(t_wolf *wolf, char **argv);
 /*
 **		mlx.c
 */
-void			ft_display_window(char *title, t_wolf *wolf);
+int				ft_display_window(char *title, t_wolf *wolf);
 void			setup_controls(t_wolf *wolf);
 
 /*
@@ -59,10 +64,11 @@ void			vec2d_mat2d_mult(t_vec2d *vec, t_mat2d *mat);
 void			load_textures(t_wolf *wolf);
 void			put_pxl_to_img(t_wolf *wolf, int x, int y, int color);
 
+void			ray_casting(t_wolf *wolf);
 /*
 int				key_press(int key, void *param);
 int				mouse_press(int button, int x, int y, void *param);
-void			ft_display_window(t_mlx *mlx, char *title,
+int				ft_display_window(t_mlx *mlx, char *title,
 									int img_width, int img_height);
 void			point_to_img(t_wolf *wolf, int x, int y, int color);
 void			setup_controls(t_wolf *wolf);

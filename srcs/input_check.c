@@ -3,10 +3,10 @@
 
 int		get_nbr_per_line(char *str)
 {
-	unsigned int	nbr_per_line;
+	int	nbr_per_line;
 
 	nbr_per_line = 0;
-	while (*str)
+	while (str && *str)
 	{
 		if (*str != ' ')
 		{
@@ -14,8 +14,6 @@ int		get_nbr_per_line(char *str)
 			{
 				str++;
 				nbr_per_line++;
-				if (str && *str != ' ')
-					return (0);
 			}
 			else
 				return (0);
@@ -52,6 +50,26 @@ int		get_dimensions(t_wolf *wolf)
 		return (1);
 }
 
+void	get_line(t_wolf *wolf, char *line, int i)
+{
+	int	j;
+	int	k;
+
+	j = 0;
+	k = 0;
+	while (line && line[k])
+	{
+		if (ft_isdigit(line[k]))
+		{
+			wolf->map[i][j] = line[k];
+			j++;
+			k++;
+		}
+		else
+			k++;
+	}
+}
+
 int		get_file(t_wolf *wolf, char **argv)
 {
 	int		i;
@@ -64,17 +82,22 @@ int		get_file(t_wolf *wolf, char **argv)
 		return (0);
 	}
 	i = 0;
-	while (ret = get_next_line(wolf->fd, &line) > 0)
+	while ((ret = get_next_line(wolf->fd, &line)) > 0)
 	{
-		wolf->map[i] = ft_strdup(line);
+		get_line(wolf, line, i);
+		/*if (!(wolf->map[i] = ft_strnew(ft_strlen(line))))
+		{
+			ft_strdel(&line);
+			return (0);
+		}
+		ft_strcpy(wolf->map[i], line);*/
 		ft_strdel(&line);
 		i++;
 	}
 	close(wolf->fd);
 	if (i == wolf->height && !ret)
 		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 int		init_player(t_wolf *wolf)
@@ -92,7 +115,7 @@ int		init_player(t_wolf *wolf)
 			{
 				wolf->player.pos.x = i;
 				wolf->player.pos.y = j;
-				wolf->player.dir.x = 1;
+				wolf->player.dir.x = -1;
 				wolf->player.dir.y = 0;
 				wolf->player.plane.x = 0;
 				wolf->player.plane.y = 0.66;
@@ -107,6 +130,10 @@ int		init_player(t_wolf *wolf)
 
 int		parse_file(t_wolf *wolf, char **argv)
 {
+	int	i;
+	int	j;
+
+	i = 0;
 	wolf->height = 0;
 	wolf->width = 0;
 	if (!get_dimensions(wolf))
@@ -117,11 +144,30 @@ int		parse_file(t_wolf *wolf, char **argv)
 	if (!(wolf->map =
 			(char **)ft_memalloc((wolf->height + 1) * sizeof(char *))))
 		return (0);
+	while (i < wolf->height)
+	{
+		if (!(wolf->map[i] = ft_strnew(wolf->width)))
+			return (0);
+		i++;
+	}
 	wolf->map[wolf->height] = NULL;
 	if (get_file(wolf, argv) == 0)
 	{
 		ft_printf("parsing problem\n");
 		return (0);
+	}
+	j = 0;
+	while (j < wolf->height)
+	{
+		i = 0;
+		while (i < wolf->width)
+		{
+			ft_putchar(wolf->map[j][i]);
+			ft_putchar(' ');
+			i++;
+		}
+		ft_putchar('\n');
+		j++;
 	}
 	if (init_player(wolf))
 		return (1);
