@@ -14,20 +14,24 @@
 
 void		init_ray(t_wolf *wolf, t_ray *ray, int x, double cam_x)
 {
-	t_vec2d	tmp;
-
 	cam_x = 2 * x / (double)WIDTH - 1;
-	tmp.x = wolf->player.dir.x * cam_x;
-	tmp.y = wolf->player.dir.y * cam_x;
-	ray->dir.x += tmp.x;
-	ray->dir.y += tmp.y;
+//	ft_printf("[1] cam_x = %f\n", cam_x);
+	ray->dir.x = wolf->player.dir.x + wolf->player.plane.x * cam_x;
+	ray->dir.y = wolf->player.dir.y + wolf->player.plane.y * cam_x;
+//	ft_printf("[1]ray->dir.x/y = (%f, %f)\n", ray->dir.x, ray->dir.y);
 	ray->mapX = (int)wolf->player.pos.x;
 	ray->mapY = (int)wolf->player.pos.y;
-	ray->deltaDist.x = fabs(1 / ray->dir.x);
-	ray->deltaDist.y = fabs(1 / ray->dir.y);
+	ray->pos.x = wolf->player.pos.x;
+	ray->pos.y = wolf->player.pos.y;
+//	ft_printf("[1]ray->mapX/Y = (%d, %d)\n", ray->mapX, ray->mapY);
+//	ft_printf("posX/Y = %f, %f\n", ray->pos.x, ray->pos.y);
+	ray->deltaDist.x = fabs(1.0 / ray->dir.x);
+	ray->deltaDist.y = fabs(1.0 / ray->dir.y);
+//	ft_printf("[1]ray->deltaDist.x/y = (%f, %f)\n", ray->deltaDist.x, ray->deltaDist.y);
 	ray->hit = 0;
-	ray->stepX = (ray->dir.x > 0) - (ray->dir.x < 0);
-	ray->stepY = (ray->dir.y > 0) - (ray->dir.y < 0);
+	ray->stepX = (ray->dir.x >= 0) - (ray->dir.x < 0);
+	ray->stepY = (ray->dir.y >= 0) - (ray->dir.y < 0);
+//	ft_printf("[1]ray->stepX/Y = (%d, %d)\n", ray->stepX, ray->stepY);
 	if (ray->dir.x < 0)
 		ray->sideDist.x = (wolf->player.pos.x - ray->mapX) * ray->deltaDist.x;
 	else
@@ -36,6 +40,7 @@ void		init_ray(t_wolf *wolf, t_ray *ray, int x, double cam_x)
 		ray->sideDist.y = (wolf->player.pos.y - ray->mapY) * ray->deltaDist.y;
 	else
 		ray->sideDist.y = (ray->mapY + 1.0 - wolf->player.pos.y) * ray->deltaDist.y;
+	ft_printf("[1]ray->sideDist.x/y = (%f, %f)\n", ray->sideDist.x, ray->sideDist.y);
 }
 
 void		sending_laser_beam(t_wolf *wolf, t_ray *ray)
@@ -54,29 +59,30 @@ void		sending_laser_beam(t_wolf *wolf, t_ray *ray)
 			ray->mapY += ray->stepY;
 			ray->side = 1;
 		}
-		ray->hit = (wolf->map[ray->mapX][ray->mapY] > 0);
+		if (wolf->map[ray->mapX][ray->mapY] > 0)
+			ray->hit = 1;
 	}
 }
 
 void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 {
 	if (ray->side == 0)
-		ray->perpWallDist = (ray->mapX - ray->pos.x + (ray->stepX < 0)) / ray->dir.x;
+		ray->perpWallDist = (ray->mapX - wolf->player.pos.x + (1 - ray->stepX) / 2 ) / ray->dir.x;
 	else
-		ray->perpWallDist = (ray->mapY - ray->pos.y + (ray->stepY) < 0) / ray->dir.y;
-	wall->line_height = (int)(HEIGHT / ray->perpWallDist);
-	wall->draw_start = FT_MAX(0, -wall->line_height / 2 + HEIGHT / 2);
-	wall->draw_end = wall->line_height / 2 + HEIGHT / 2;
-	if (wall->draw_end >= HEIGHT)
-		wall->draw_end = HEIGHT - 1;
+		ray->perpWallDist = (ray->mapY - wolf->player.pos.y + (1 - ray->stepY) / 2) / ray->dir.y;
+	ft_printf("perpwallDist = %f\n", ray->perpWallDist);
+	wall->line_height = (int)(200 / ray->perpWallDist);
+	ft_printf("line_height = %d\n", wall->line_height);
+	wall->draw_start = FT_MAX(0, (200 - wall->line_height) / 2);
+	wall->draw_end = (200 + wall->line_height) / 2;
+	if (wall->draw_end >= 200)
+		wall->draw_end = 200 - 1;
+	ft_printf("colonne de pixel x = %d : start/end = [%d][%d] allumé\n", x, wall->draw_start, wall->draw_end);
 	while (wall->draw_start < wall->draw_end)
 	{
-		if (wall->draw_start > 0 && wall->draw_start < wolf->height)
-			if (x > 0 && x < wolf->width)
-			{
-				wolf->mlx.img.data[wall->draw_start * wolf->width + x] = 1245630;
-				ft_printf("pixel[%d][%d] allumé\n", x, wall->draw_start);
-			}
+		if (wall->draw_start > 0 && wall->draw_start < HEIGHT)
+			if (x > 0 && x < WIDTH)
+				wolf->mlx.img.data[wall->draw_start * WIDTH + x] = 145630;
 		wall->draw_start++;
 	}
 	//PARTIE MLX
@@ -99,22 +105,22 @@ void		ray_casting(t_wolf *wolf)
 
 	x = -1;
 	cam_x = 0.000;
-	ft_printf("player.pos.x = %f\n", wolf->player.pos.x);
-	ft_printf("player.pos.y = %f\n", wolf->player.pos.y);
-	ft_printf("player.dir.x = %f\n", wolf->player.dir.x);
-	ft_printf("player.dir.y = %f\n", wolf->player.dir.y);
-	ft_printf("player.plane.x = %f\n", wolf->player.plane.x);
-	ft_printf("player.plane.y = %f\n", wolf->player.plane.y);
 	while (++x < WIDTH)
 	{
 		init_ray(wolf, &ray, x, cam_x);
-		sending_laser_beam(wolf, &ray);
+/*		ft_printf("[2] cam_x = %f\n", cam_x);
+		ft_printf("[2]ray->dir.x/y = (%f, %f)\n", ray.dir.x, ray.dir.y);
+		ft_printf("[2]ray->mapX/Y = (%d, %d)\n", ray.mapX, ray.mapY);
+		ft_printf("[2]ray->deltaDist.x/y = (%f, %f)\n", ray.deltaDist.x, ray.deltaDist.y);
+		ft_printf("[2]ray->stepX/Y = (%d, %d)\n", ray.stepX, ray.stepY);
+		ft_printf("[2]ray->sideDist.x/y = (%f, %f)\n", ray.sideDist.x, ray.sideDist.y);
+*/		sending_laser_beam(wolf, &ray);
+		if (ray.hit == 0)
+		{
+			ft_printf("\tray casting : x = %d\n", x);
+			ft_printf("[2]ray.hit = %d\n", ray.hit);
+		}
 		draw_wall(wolf, &ray, &wall, x);
 	}
-		ft_printf("player.pos.x = %f\n", wolf->player.pos.x);
-	ft_printf("player.pos.y = %f\n", wolf->player.pos.y);
-	ft_printf("player.dir.x = %f\n", wolf->player.dir.x);
-	ft_printf("player.dir.y = %f\n", wolf->player.dir.y);
-	ft_printf("player.plane.x = %f\n", wolf->player.plane.x);
-	ft_printf("player.plane.y = %f\n", wolf->player.plane.y);
+	mlx_put_image_to_window(wolf->mlx.mlx_ptr, wolf->mlx.win_ptr, wolf->mlx.img.ptr, 0, 0);
 }
