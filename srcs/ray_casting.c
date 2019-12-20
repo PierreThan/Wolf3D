@@ -40,7 +40,7 @@ void		init_ray(t_wolf *wolf, t_ray *ray, int x, double cam_x)
 		ray->sideDist.y = (wolf->player.pos.y - ray->mapY) * ray->deltaDist.y;
 	else
 		ray->sideDist.y = (ray->mapY + 1.0 - wolf->player.pos.y) * ray->deltaDist.y;
-	ft_printf("[1]ray->sideDist.x/y = (%f, %f)\n", ray->sideDist.x, ray->sideDist.y);
+	//ft_printf("[1]ray->sideDist.x/y = (%f, %f)\n", ray->sideDist.x, ray->sideDist.y);
 }
 
 void		sending_laser_beam(t_wolf *wolf, t_ray *ray)
@@ -66,17 +66,22 @@ void		sending_laser_beam(t_wolf *wolf, t_ray *ray)
 
 void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 {
+	int	h;
+
+	h = 100;
 	if (ray->side == 0)
 		ray->perpWallDist = (ray->mapX - wolf->player.pos.x + (1 - ray->stepX) / 2 ) / ray->dir.x;
 	else
 		ray->perpWallDist = (ray->mapY - wolf->player.pos.y + (1 - ray->stepY) / 2) / ray->dir.y;
-	ft_printf("perpwallDist = %f\n", ray->perpWallDist);
-	wall->line_height = (int)(200 / ray->perpWallDist);
+	ft_printf("perpWallDist = %f\n", ray->perpWallDist);
+	wall->line_height = (int)((double)h / ray->perpWallDist);
 	ft_printf("line_height = %d\n", wall->line_height);
-	wall->draw_start = FT_MAX(0, (200 - wall->line_height) / 2);
-	wall->draw_end = (200 + wall->line_height) / 2;
-	if (wall->draw_end >= 200)
-		wall->draw_end = 200 - 1;
+	wall->draw_start = h / 2 - wall->line_height / 2;
+	if (wall->draw_start < 0)
+		wall->draw_start = 0;
+	wall->draw_end = h / 2 + wall->line_height / 2;
+	if (wall->draw_end >= h)
+		wall->draw_end =  h - 1;
 	ft_printf("colonne de pixel x = %d : start/end = [%d][%d] allumé\n", x, wall->draw_start, wall->draw_end);
 	while (wall->draw_start < wall->draw_end)
 	{
