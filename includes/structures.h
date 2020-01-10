@@ -92,6 +92,8 @@ typedef struct	s_wolf
 	int			height;
 	int			width;
 	char		**map;
+	double		move_speed;
+	double		rot_speed;
     t_player    player;
 	t_mlx		mlx;
 }				t_wolf;

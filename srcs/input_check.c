@@ -111,8 +111,8 @@ int		init_player(t_wolf *wolf)
 				wolf->player.pos.x += 0.5;
 				wolf->player.pos.y = j;
 				wolf->player.pos.y += 0.5;
-				wolf->player.dir.x = -1;
-				wolf->player.dir.y = 0;
+				wolf->player.dir.x = 1;
+				wolf->player.dir.y = 1;
 				wolf->player.plane.x = 0;
 				wolf->player.plane.y = 0.66;
 				return (1);
@@ -152,7 +152,7 @@ int		parse_file(t_wolf *wolf, char **argv)
 		return (0);
 	}
 	j = 0;
-	//AFFICHAGE
+	/*AFFICHAGE
 	while (j < wolf->height)
 	{
 		i = 0;
@@ -164,7 +164,7 @@ int		parse_file(t_wolf *wolf, char **argv)
 		}
 		ft_putchar('\n');
 		j++;
-	}
+	}*/
 	if (init_player(wolf))
 		return (1);
 	return (0);

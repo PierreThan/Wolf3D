@@ -42,20 +42,69 @@ int		close_wolf(void *param)
 	(void)param;
 	exit(0);
 }
+void	move(int key, t_wolf *wolf)
+{
+	int	new_x;
+	int	new_y;
+
+	if (key == ARROW_UP)
+	{
+		new_x = (int)(wolf->player.pos.x + wolf->player.dir.x * wolf->move_speed);
+		new_y = (int)(wolf->player.pos.y + wolf->player.dir.y * wolf->move_speed);
+ 		if (wolf->map[new_x][(int)wolf->player.pos.y] == '0')
+			wolf->player.pos.x += wolf->player.dir.x * wolf->move_speed;
+    	if (wolf->map[(int)wolf->player.pos.x][new_y] == '0')
+	  		wolf->player.pos.y += wolf->player.dir.y * wolf->move_speed;
+	}
+	else if (key == ARROW_DOWN)
+	{
+		new_x = (int)(wolf->player.pos.x - wolf->player.dir.x * wolf->move_speed);
+		new_y = (int)(wolf->player.pos.y - wolf->player.dir.y * wolf->move_speed);
+ 		if (wolf->map[new_x][(int)wolf->player.pos.y] == '0')
+			wolf->player.pos.x -= wolf->player.dir.x * wolf->move_speed;
+    	if (wolf->map[(int)wolf->player.pos.x][new_y] == '0')
+	  		wolf->player.pos.y -= wolf->player.dir.y * wolf->move_speed;
+	}
+	ray_casting(wolf);
+}
+
+void	rotate(int key, t_wolf *wolf)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = wolf->player.dir.x;
+	old_plane_x = wolf->player.plane.x;
+	if (key == ARROW_LEFT)
+	{
+		wolf->player.dir.x = wolf->player.dir.x * cos(-wolf->rot_speed) - wolf->player.dir.y * sin(-wolf->rot_speed);
+    	wolf->player.dir.y = old_dir_x * sin(-wolf->rot_speed) + wolf->player.dir.y * cos(-wolf->rot_speed);
+		wolf->player.plane.x = wolf->player.plane.x * cos(-wolf->rot_speed) - wolf->player.plane.y * sin(-wolf->rot_speed);
+		wolf->player.plane.y = old_plane_x * sin(-wolf->rot_speed) + wolf->player.plane.y * cos(-wolf->rot_speed);
+	}
+	else if (key == ARROW_RIGHT)
+	{
+		wolf->player.dir.x = wolf->player.dir.x * cos(wolf->rot_speed) - wolf->player.dir.y * sin(wolf->rot_speed);
+    	wolf->player.dir.y = old_dir_x * sin(wolf->rot_speed) + wolf->player.dir.y * cos(wolf->rot_speed);
+    	wolf->player.plane.x = wolf->player.plane.x * cos(wolf->rot_speed) - wolf->player.plane.y * sin(wolf->rot_speed);
+    	wolf->player.plane.y = old_plane_x * sin(wolf->rot_speed) + wolf->player.plane.y * cos(wolf->rot_speed);
+	}
+	ray_casting(wolf);
+}
 
 int		key_press(int key, void *param)
 {
 	t_wolf *wolf;
 
-	ft_printf("key pressed = %d\n", key);
+	//ft_printf("key pressed = %d\n", key);
 	wolf = (t_wolf *)param;
 	if (key == MAIN_PAD_ESC)
 		exit(0);
-/*	else if (key == ARROW_UP || key == ARROW_DOWN)
+	else if (key == ARROW_UP || key == ARROW_DOWN)
 		move(key, wolf);
 	else if (key == ARROW_LEFT || key == ARROW_RIGHT)
 		rotate(key, wolf);
-*/	return (0);
+	return (0);
 }
 
 void	setup_controls(t_wolf *wolf)

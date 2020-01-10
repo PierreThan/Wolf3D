@@ -59,27 +59,26 @@ void		init_wolf(t_wolf *wolf)
 	wolf->width = 0;
 	wolf->player.pos.x = 0;
 	wolf->player.pos.y = 0;
-	wolf->player.dir.x = 0;
-	wolf->player.dir.y = 0;
+	wolf->player.dir.x = 100;
+	wolf->player.dir.y = 1;
 	wolf->player.plane.x = 0;
 	wolf->player.plane.y = 0;
+	wolf->move_speed = 0.05;
+	wolf->rot_speed = 0.025;
 }
 
 int			main(int ac, char **argv)
 {
 	t_wolf	wolf;
 
-	// verifier check_input, free_wolf et init_mlx
-	// faire le raycasting puis les hooks
 	init_wolf(&wolf);
+	wolf.player.dir.x = 1;
+	printf("wolf.player.dir.x = [%f]\n", wolf.player.dir.x);
 	if (check_input(ac, argv, &wolf) == 0)
 		return (free_wolf(&wolf));
 	if (ft_display_window("wolf", &wolf) == 0)
 		return (free_wolf(&wolf));
-	// faire tableau --> grille avec bloc 64x64(x64);
-	//init_grid(&wolf);
-	wolf.player.pos.x = 3.5;
-	wolf.player.pos.y = 2.5;
+	ft_printf("wolf.player.dir.x = [%f], wolf.player.dir.y = [%f]\n", wolf.player.dir.x, wolf.player.dir.y);
 	ray_casting(&wolf);
 	setup_controls(&wolf);
 	mlx_loop(wolf.mlx.mlx_ptr);
