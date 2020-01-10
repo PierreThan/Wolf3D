@@ -50,19 +50,19 @@ int		get_dimensions(t_wolf *wolf)
 		return (1);
 }
 
-void	get_line(t_wolf *wolf, char *line, int i)
+void	get_line(t_wolf *wolf, char *line, int j)
 {
-	int	j;
+	int	i;
 	int	k;
 
-	j = 0;
+	i = 0;
 	k = 0;
 	while (line && line[k])
 	{
 		if (ft_isdigit(line[k]))
 		{
 			wolf->map[i][j] = line[k];
-			j++;
+			i++;
 			k++;
 		}
 		else
@@ -72,7 +72,7 @@ void	get_line(t_wolf *wolf, char *line, int i)
 
 int		get_file(t_wolf *wolf, char **argv)
 {
-	int		i;
+	int		j;
 	int		ret;
 	char	*line;
 
@@ -81,21 +81,15 @@ int		get_file(t_wolf *wolf, char **argv)
 		ft_printf("usage error\n");
 		return (0);
 	}
-	i = 0;
+	j = 0;
 	while ((ret = get_next_line(wolf->fd, &line)) > 0)
 	{
-		get_line(wolf, line, i);
-		/*if (!(wolf->map[i] = ft_strnew(ft_strlen(line))))
-		{
-			ft_strdel(&line);
-			return (0);
-		}
-		ft_strcpy(wolf->map[i], line);*/
+		get_line(wolf, line, j);
 		ft_strdel(&line);
-		i++;
+		j++;
 	}
 	close(wolf->fd);
-	if (i == wolf->height && !ret)
+	if (j == wolf->height && !ret)
 		return (1);
 	return (0);
 }
@@ -118,7 +112,7 @@ int		init_player(t_wolf *wolf)
 				wolf->player.pos.y = j;
 				wolf->player.pos.y += 0.5;
 				wolf->player.dir.x = -1;
-				wolf->player.dir.y = -1;
+				wolf->player.dir.y = 0;
 				wolf->player.plane.x = 0;
 				wolf->player.plane.y = 0.66;
 				return (1);
@@ -144,27 +138,27 @@ int		parse_file(t_wolf *wolf, char **argv)
 		return (0);
 	}
 	if (!(wolf->map =
-			(char **)ft_memalloc((wolf->height + 1) * sizeof(char *))))
+			(char **)ft_memalloc(wolf->width * sizeof(char *))))
 		return (0);
-	while (i < wolf->height)
+	while (i < wolf->width)
 	{
-		if (!(wolf->map[i] = ft_strnew(wolf->width)))
+		if (!(wolf->map[i] = ft_strnew(wolf->height)))
 			return (0);
 		i++;
 	}
-	wolf->map[wolf->height] = NULL;
 	if (get_file(wolf, argv) == 0)
 	{
 		ft_printf("parsing problem\n");
 		return (0);
 	}
 	j = 0;
+	//AFFICHAGE
 	while (j < wolf->height)
 	{
 		i = 0;
 		while (i < wolf->width)
 		{
-			ft_putchar(wolf->map[j][i]);
+			ft_putchar(wolf->map[i][j]);
 			ft_putchar(' ');
 			i++;
 		}

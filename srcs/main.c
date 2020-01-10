@@ -78,6 +78,8 @@ int			main(int ac, char **argv)
 		return (free_wolf(&wolf));
 	// faire tableau --> grille avec bloc 64x64(x64);
 	//init_grid(&wolf);
+	wolf.player.pos.x = 3.5;
+	wolf.player.pos.y = 2.5;
 	ray_casting(&wolf);
 	setup_controls(&wolf);
 	mlx_loop(wolf.mlx.mlx_ptr);
