@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2019/12/04 16:06:22 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/14 19:08:11 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,7 @@ void		init_ray(t_wolf *wolf, t_ray *ray, int x, double cam_x)
 	ray->pos.x = wolf->player.pos.x;
 	ray->pos.y = wolf->player.pos.y;
 	ray->deltaDist.x = sqrt(1 + (ray->dir.y * ray->dir.y) / (ray->dir.x * ray->dir.x));
-	//ft_printf("wolf->player.dir.x = [%f], wolf->player.dir.y = [%f]\n", wolf->player.dir.x, wolf->player.dir.y);
-	//ft_printf("ray->dir.x = [%f], ray->dir.y = [%f]\n", ray->dir.x, ray->dir.y);
-	//ft_printf("avant racine : [%f]\n",1 + (ray->dir.y * ray->dir.y) / (ray->dir.x * ray->dir.x));
 	ray->deltaDist.y = sqrt(1 + (ray->dir.x * ray->dir.x) / (ray->dir.y * ray->dir.y));
-	//ft_printf("ray->deltaDist.x = [%f], ray->deltaDist.y = [%f]\n", ray->deltaDist.x, ray->deltaDist.y);
 	ray->hit = 0;
 	ray->stepX = (ray->dir.x >= 0) - (ray->dir.x < 0);
 	ray->stepY = (ray->dir.y >= 0) - (ray->dir.y < 0);
@@ -61,6 +57,28 @@ void		sending_laser_beam(t_wolf *wolf, t_ray *ray)
 	}
 }
 
+static int	direction(t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		if (ray->dir.y > 0)
+		{
+			if (ray->dir.x > 0)
+				return (10100000);
+			else
+				return (12100000);
+		}
+		else
+		{
+			if (ray->dir.x > 0)
+				return (10100000);
+			else
+				return (12100000);
+		}
+	}
+	return (11100000);
+}
+
 void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 {
 	int	h;
@@ -81,7 +99,7 @@ void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 	{
 		if (wall->draw_start > 0 && wall->draw_start < HEIGHT)
 			if (x > 0 && x < WIDTH)
-				wolf->mlx.img.data[wall->draw_start * WIDTH + x] = 145630;
+				wolf->mlx.img.data[wall->draw_start * WIDTH + x] = direction(ray);
 		wall->draw_start++;
 	}
 		/*
@@ -111,7 +129,6 @@ void		ray_casting(t_wolf *wolf)
 	wolf->mlx.img.data =
 	(int *)mlx_get_data_addr(wolf->mlx.img.ptr, &(wolf->mlx.img.bpp),
 					&(wolf->mlx.img.size_l), &(wolf->mlx.img.endian));
-	//ft_printf("wolf->player.dir.x = [%f], wolf->player.dir.y = [%f]\n", wolf->player.dir.x, wolf->player.dir.y);
 	while (++x < WIDTH)
 	{
 		init_ray(wolf, &ray, x, cam_x);

@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:43:52 by atyczyns          #+#    #+#             */
-/*   Updated: 2019/11/20 16:48:33 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/14 19:15:58 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,21 @@ int			free_wolf(t_wolf *wolf)
 {
 	int		i;
 
-	i = 0;
 	if (wolf)
 	{
 		if (wolf->mlx.mlx_ptr)
 		{
-			mlx_destroy_image(wolf->mlx.mlx_ptr, wolf->mlx.img.ptr);
-			mlx_destroy_window(wolf->mlx.mlx_ptr, wolf->mlx.win_ptr);
+			if (wolf->mlx.img.ptr)
+				mlx_destroy_image(wolf->mlx.mlx_ptr, wolf->mlx.img.ptr);
+			if (wolf->mlx.mlx_ptr)
+				mlx_destroy_window(wolf->mlx.mlx_ptr, wolf->mlx.win_ptr);
 		}
 		if (wolf->map)
 		{
-			while (wolf->map[i])
-				ft_strdel(&(wolf->map[i++]));
+			i = -1;
+			while (++i < wolf->width)
+				if (wolf->map[i])
+					ft_strdel(&(wolf->map[i]));
 			ft_memdel((void **)(&(wolf->map)));
 		}
 	}
@@ -63,8 +66,8 @@ void		init_wolf(t_wolf *wolf)
 	wolf->player.dir.y = 1;
 	wolf->player.plane.x = 0;
 	wolf->player.plane.y = 0;
-	wolf->move_speed = 0.05;
-	wolf->rot_speed = 0.025;
+	wolf->move_speed = 0.055;
+	wolf->rot_speed = 0.03;
 }
 
 int			main(int ac, char **argv)

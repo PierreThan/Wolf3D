@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 02:52:37 by pthan             #+#    #+#             */
-/*   Updated: 2019/10/25 02:52:38 by pthan            ###   ########.fr       */
+/*   Updated: 2020/01/14 19:15:12 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int		key_press(int key, void *param)
 	//ft_printf("key pressed = %d\n", key);
 	wolf = (t_wolf *)param;
 	if (key == MAIN_PAD_ESC)
-		exit(0);
+		close_wolf(wolf);
 	else if (key == ARROW_UP || key == ARROW_DOWN)
 		move(key, wolf);
 	else if (key == ARROW_LEFT || key == ARROW_RIGHT)
