@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/14 19:08:11 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/17 15:22:19 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,30 @@ void		sending_laser_beam(t_wolf *wolf, t_ray *ray)
 	}
 }
 
-static int	direction(t_ray *ray)
+static int	direction(t_wolf *wolf, t_ray *ray, t_wall *wall)
 {
+	(void)wolf;
+	(void)wall;
 	if (ray->side == 0)
 	{
-		if (ray->dir.y > 0)
-		{
-			if (ray->dir.x > 0)
-				return (10100000);
-			else
-				return (12100000);
-		}
+		
+		if (ray->dir.x > 0)
+			return (10100000);
 		else
-		{
-			if (ray->dir.x > 0)
-				return (10100000);
-			else
-				return (12100000);
-		}
+			return (12100000);
+		/*
+		wall->x_wall = wolf->player.pos.y + ray->perpWallDist * ray->dir.y;
+		wall->x_wall -= floor((wall->x_wall));
+		wolf->texture.x_text = wall->x_wall * WIDTH;
+		if (ray->dir.x > 0)
+			return (wolf->texture.text_map[1][WIDTH - wolf->texture.x_text - 1]);
+		else
+			return (wolf->texture.text_map[1][wolf->texture.x_text]);*/
 	}
+	/*wall->x_wall = wolf->player.pos.x + ray->perpWallDist * ray->dir.x;
+	wall->x_wall -= floor((wall->x_wall));
+	wolf->texture.x_text = wall->x_wall + WIDTH;
+	return (wolf->texture.text_map[1][wolf->texture.x_text]);*/
 	return (11100000);
 }
 
@@ -84,6 +89,7 @@ void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 	int	h;
 
 	h = 400;
+//	init_texture(wolf);
 	if (ray->side == 0)
 		ray->perpWallDist = (ray->mapX - wolf->player.pos.x + (1 - ray->stepX) / 2 ) / ray->dir.x;
 	else
@@ -99,19 +105,9 @@ void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 	{
 		if (wall->draw_start > 0 && wall->draw_start < HEIGHT)
 			if (x > 0 && x < WIDTH)
-				wolf->mlx.img.data[wall->draw_start * WIDTH + x] = direction(ray);
+				wolf->mlx.img.data[wall->draw_start * WIDTH + x] = direction(wolf, ray, wall);
 		wall->draw_start++;
 	}
-		/*
-		PARTIE MLX
-		il faut rajouter a la structure wall un "ID" pour les murs ainsi que des couleur
-		et rajouter un fichier avec les BITMAP du mur, du sol et du ciel
-
-		il faut initier wolf->x_texture ici
-
-		while (wall->draw_start < wall->draw_end)
-			put_pxl_to_img(wolf, x, wall->draw_start++, wolf->color);
-		*/
 }
 
 void		ray_casting(t_wolf *wolf)

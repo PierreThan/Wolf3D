@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 13:29:49 by pthan             #+#    #+#             */
-/*   Updated: 2020/01/14 19:08:57 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/17 13:22:55 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct	s_wall
 	int			line_height;
 	int			draw_start;
 	int			draw_end;
+	double		x_wall;
 }				t_wall;
 
 typedef struct	s_texture
@@ -80,6 +81,8 @@ typedef struct	s_texture
 	int			bpp;
 	int			sizeline;
 	int			endian;
+	int			**text_map;
+	int			x_text;
 }				t_texture;
 
 typedef struct	s_wolf

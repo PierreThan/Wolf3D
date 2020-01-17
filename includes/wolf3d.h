@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 17:50:40 by pthan             #+#    #+#             */
-/*   Updated: 2019/12/04 15:41:50 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/17 14:04:48 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@
 int				free_wolf(t_wolf *wolf);
 
 /*
+**		draw_textures.c
+*/
+void			init_texture(t_wolf *wolf);
+/*
+ *
 **		input_check.c
 */
 int				parse_file(t_wolf *wolf, char **argv);
@@ -57,12 +62,6 @@ double			vect2d_dot(t_vec2d a, t_vec2d b);
 t_vec2d			*vec2d_sum(t_vec2d a, t_vec2d b);
 void			vec2d_normalize(t_vec2d *vect);
 void			vec2d_mat2d_mult(t_vec2d *vec, t_mat2d *mat);
-
-/*
-**		draw_textures.c
-*/
-void			load_textures(t_wolf *wolf);
-void			put_pxl_to_img(t_wolf *wolf, int x, int y, int color);
 
 void			ray_casting(t_wolf *wolf);
 /*
