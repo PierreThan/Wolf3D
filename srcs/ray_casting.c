@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/17 15:22:19 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:58:43 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,36 +57,50 @@ void		sending_laser_beam(t_wolf *wolf, t_ray *ray)
 	}
 }
 
-static int	direction(t_wolf *wolf, t_ray *ray, t_wall *wall)
+static int	direction(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 {
-	(void)wolf;
-	(void)wall;
+	double	step;
+	double	text_pos;
+	int		y;
+	int		text_num;
+
+	text_num = wolf->map[ray->mapX][ray->mapY] - 1;
 	if (ray->side == 0)
+		wall->x_wall = wolf->player.pos.y + ray->perpWallDist * ray->dir.y;
+	else
+		wall->x_wall = wolf->player.pos.x + ray->perpWallDist * ray->dir.x;
+	wall->x_wall -= floor((wall->x_wall));
+	wolf->texture.x_text = int(wall->x_wall * WIDTH);
+	if ((ray->side == 0 && ray->dir.x > 0)
+		|| (ray->side == 1 && ray->dir.y < 0))
+		wolf->texture.x_text = WIDTH - wolf->texture.x_text - 1;
+	y = wall->draw_start - 1;
+	step = 1.0 * HEIGHT / wall->line_height;
+	text_pos = (wall->draw_start - 400 / 2 + wall->line_height / 2) * step;
+	while (++y < wall->draw_end)
+	{
+		wolf->texture.y_text = (int)text_pos & (HEIGHT - 1);
+		text_pos += step;
+		Uint32 color = wolf->texture->text_map[text_num][HEIGHT
+		* wolf->texture.y_text + wolf->texture.x_text];
+		if (ray->side == 1)
+			color = (color >> 1) & 8355711;
+		buffer[y][x] = color;
+	}
+	/*if (ray->side == 0)
 	{
 		
 		if (ray->dir.x > 0)
 			return (10100000);
 		else
 			return (12100000);
-		/*
-		wall->x_wall = wolf->player.pos.y + ray->perpWallDist * ray->dir.y;
-		wall->x_wall -= floor((wall->x_wall));
-		wolf->texture.x_text = wall->x_wall * WIDTH;
-		if (ray->dir.x > 0)
-			return (wolf->texture.text_map[1][WIDTH - wolf->texture.x_text - 1]);
-		else
-			return (wolf->texture.text_map[1][wolf->texture.x_text]);*/
-	}
-	/*wall->x_wall = wolf->player.pos.x + ray->perpWallDist * ray->dir.x;
-	wall->x_wall -= floor((wall->x_wall));
-	wolf->texture.x_text = wall->x_wall + WIDTH;
-	return (wolf->texture.text_map[1][wolf->texture.x_text]);*/
-	return (11100000);
+	}*/
+	//return (11100000);
 }
 
 void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 {
-	int	h;
+	int		h;
 
 	h = 400;
 //	init_texture(wolf);
@@ -105,7 +119,7 @@ void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 	{
 		if (wall->draw_start > 0 && wall->draw_start < HEIGHT)
 			if (x > 0 && x < WIDTH)
-				wolf->mlx.img.data[wall->draw_start * WIDTH + x] = direction(wolf, ray, wall);
+				wolf->mlx.img.data[wall->draw_start * WIDTH + x] = direction(wolf, ray, wall, x);
 		wall->draw_start++;
 	}
 }
