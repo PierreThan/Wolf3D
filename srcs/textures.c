@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 13:56:39 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/22 18:11:07 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:50:52 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,35 @@ void	init_texture(t_wolf *wolf)
 	int		xycolor;
 
 	x = -1;
-	if (!(wolf->texture.buffer = (unsigned int**)malloc(sizeof(unsigned int *) * HEIGHT + 1)))
+	if (!(wolf->texture.text_map = (int **)ft_memalloc(sizeof(int *) * 8)))
 		free_wolf(wolf);
-	while (++x <= HEIGHT)
-		if (!(wolf->texture.buffer[x] = (unsigned int*)malloc(sizeof(unsigned int) * WIDTH + 1)))
+	while (++x < 8)
+		if (!(wolf->texture.text_map[x]
+			= (int *)ft_memalloc(sizeof(int) * TEXT_WIDTH * TEXT_HEIGHT)))
 			free_wolf(wolf);
 	x = -1;
-	while (++x < WIDTH)
+	while (++x < TEXT_WIDTH)
 	{
 		y = -1;
-		while (++y < HEIGHT)
+		while (++y < TEXT_HEIGHT)
 		{
-			xcolor = (x * 256 / WIDTH) ^ (y * 256 / HEIGHT);
-			ycolor = y * 256 / HEIGHT;
-			xycolor = y * 128 / HEIGHT + x * 128 / WIDTH;
-			wolf->texture.text_map[0][WIDTH * y + x] = 65536 * 254 * (x != y && x != WIDTH - y);
-			wolf->texture.text_map[1][WIDTH * y + x] = xycolor + 256 * xycolor + 65536 * xycolor;
-			wolf->texture.text_map[2][WIDTH * y + x] = 256 * xycolor + 65536 * xycolor;
-			wolf->texture.text_map[3][WIDTH * y + x] = xcolor + 256 * xcolor + 65536 * xycolor;
-			wolf->texture.text_map[4][WIDTH * y + x] = 256 * xcolor;
-			wolf->texture.text_map[5][WIDTH * y + x] = 65536 * 192 * (x % 16 && y % 16);;
-			wolf->texture.text_map[6][WIDTH * y + x] = 65536 * ycolor;
-			wolf->texture.text_map[7][WIDTH * y + x] = 128 + 256 * 128 + 65536 * 128;
+			xcolor = (x * 256 / TEXT_WIDTH) ^ (y * 256 / TEXT_HEIGHT);
+			ycolor = y * 256 / TEXT_HEIGHT;
+			xycolor = y * 128 / TEXT_HEIGHT + x * 128 / TEXT_WIDTH;
+			wolf->texture.text_map[0][TEXT_WIDTH * y + x]
+				= 65536 * 254 * (x != y && x != TEXT_WIDTH - y);
+			wolf->texture.text_map[1][TEXT_WIDTH * y + x]
+				= xycolor + 256 * xycolor + 65536 * xycolor;
+			wolf->texture.text_map[2][TEXT_WIDTH * y + x]
+				= 256 * xycolor + 65536 * xycolor;
+			wolf->texture.text_map[3][TEXT_WIDTH * y + x]
+				= xcolor + 256 * xcolor + 65536 * xycolor;
+			wolf->texture.text_map[4][TEXT_WIDTH * y + x] = 256 * xcolor;
+			wolf->texture.text_map[5][TEXT_WIDTH * y + x] 
+				= 65536 * 192 * (x % 16 && y % 16);;
+			wolf->texture.text_map[6][TEXT_WIDTH * y + x] = 65536 * ycolor;
+			wolf->texture.text_map[7][TEXT_WIDTH * y + x] 
+				= 128 + 256 * 128 + 65536 * 128;
 		}
 	}
 }

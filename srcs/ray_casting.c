@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/22 18:25:23 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:56:47 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,19 @@ static void	direction(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 	wolf->texture.x_text = wall->x_wall * TEXT_WIDTH;
 	if ((ray->side == 0 && ray->dir.x > 0)
 		|| (ray->side == 1 && ray->dir.y < 0))
-		wolf->texture.x_text = WIDTH - wolf->texture.x_text - 1;
+		wolf->texture.x_text = TEXT_WIDTH - wolf->texture.x_text - 1;
 	y = wall->draw_start - 1;
 	step = 1.0 * TEXT_HEIGHT / wall->line_height;
 	text_pos = (wall->draw_start - 400 / 2 + wall->line_height / 2) * step;
 	while (++y < wall->draw_end)
 	{
-		wolf->texture.y_text = (int)text_pos & (HEIGHT - 1);
+		wolf->texture.y_text = (int)text_pos & (TEXT_HEIGHT - 1);
 		text_pos += step;
-		color = wolf->texture.text_map[text_num][HEIGHT
+		color = wolf->texture.text_map[text_num][TEXT_HEIGHT
 				* wolf->texture.y_text + wolf->texture.x_text];
 		if (ray->side == 1)
 			color = (color >> 1) & 8355711;
-		wolf->texture.buffer[y][x] = color;
+		wolf->mlx.img.data[wall->draw_start * WIDTH + x] = color;
 	}
 }
 
@@ -95,7 +95,7 @@ void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 	int		h;
 
 	h = 400;
-//	init_texture(wolf);
+	init_texture(wolf);
 	if (ray->side == 0)
 		ray->perpWallDist = (ray->mapX - wolf->player.pos.x + (1 - ray->stepX) / 2 ) / ray->dir.x;
 	else
@@ -108,11 +108,6 @@ void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 	if (wall->draw_end >= h)
 		wall->draw_end =  h - 1;
 	direction(wolf, ray, wall, x);
-	while (wall->draw_start < wall->draw_end)
-	{
-		wolf->mlx.img.data[wall->draw_start * WIDTH + x] = wolf->texture.buffer[x][];
-		wall->draw_start++;
-	}
 }
 
 void		ray_casting(t_wolf *wolf)
@@ -124,7 +119,8 @@ void		ray_casting(t_wolf *wolf)
 
 	x = -1;
 	cam_x = 0.000;
-	mlx_destroy_image(wolf->mlx.mlx_ptr, wolf->mlx.img.ptr);
+	if (wolf->mlx.mlx_ptr && wolf->mlx.img.ptr)
+		mlx_destroy_image(wolf->mlx.mlx_ptr, wolf->mlx.img.ptr);
 	wolf->mlx.img.ptr =
 		mlx_new_image(wolf->mlx.mlx_ptr, WIDTH, HEIGHT);
 	wolf->mlx.img.data =

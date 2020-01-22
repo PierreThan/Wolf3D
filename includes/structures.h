@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 13:29:49 by pthan             #+#    #+#             */
-/*   Updated: 2020/01/22 18:01:13 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:45:55 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct	s_texture
 	int			**text_map;
 	int			x_text;
 	int			y_text;
-	unsigned int	**buffer;
 }				t_texture;
 
 typedef struct	s_wolf
