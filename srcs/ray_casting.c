@@ -57,45 +57,11 @@ void		sending_laser_beam(t_wolf *wolf, t_ray *ray)
 	}
 }
 
-static void	direction(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
-{
-	double	step;
-	double	text_pos;
-	int		y;
-	int		text_num;
-	unsigned int	color;
-
-	text_num = wolf->map[ray->mapX][ray->mapY] - 1;
-	if (ray->side == 0)
-		wall->x_wall = wolf->player.pos.y + ray->perpWallDist * ray->dir.y;
-	else
-		wall->x_wall = wolf->player.pos.x + ray->perpWallDist * ray->dir.x;
-	wall->x_wall -= floor((wall->x_wall));
-	wolf->texture.x_text = wall->x_wall * TEXT_WIDTH;
-	if ((ray->side == 0 && ray->dir.x > 0)
-		|| (ray->side == 1 && ray->dir.y < 0))
-		wolf->texture.x_text = TEXT_WIDTH - wolf->texture.x_text - 1;
-	y = wall->draw_start - 1;
-	step = 1.0 * TEXT_HEIGHT / wall->line_height;
-	text_pos = (wall->draw_start - 400 / 2 + wall->line_height / 2) * step;
-	while (++y < wall->draw_end)
-	{
-		wolf->texture.y_text = (int)text_pos & (TEXT_HEIGHT - 1);
-		text_pos += step;
-		color = wolf->texture.text_map[text_num][TEXT_HEIGHT
-				* wolf->texture.y_text + wolf->texture.x_text];
-		if (ray->side == 1)
-			color = (color >> 1) & 8355711;
-		wolf->mlx.img.data[wall->draw_start * WIDTH + x] = color;
-	}
-}
-
-void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
+void		init_wall(t_wolf *wolf, t_ray *ray, t_wall *wall)
 {
 	int		h;
 
 	h = 400;
-	init_texture(wolf);
 	if (ray->side == 0)
 		ray->perpWallDist = (ray->mapX - wolf->player.pos.x + (1 - ray->stepX) / 2 ) / ray->dir.x;
 	else
@@ -107,9 +73,52 @@ void		draw_wall(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 	wall->draw_end = h / 2 + wall->line_height / 2;
 	if (wall->draw_end >= h)
 		wall->draw_end =  h - 1;
-	direction(wolf, ray, wall, x);
 }
 
+static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
+{
+	//double	step;
+	//double	text_pos;
+	int		y;
+	int		text_num;
+	unsigned int	color;
+	int				d;
+	int				h;
+
+	h = 400;
+	text_num = wolf->map[ray->mapX][ray->mapY] - 49;
+	if (ray->side == 0)
+		wall->x_wall = wolf->player.pos.y + ray->perpWallDist * ray->dir.y;
+	else
+		wall->x_wall = wolf->player.pos.x + ray->perpWallDist * ray->dir.x;
+	wall->x_wall -= floor((wall->x_wall));
+	wolf->texture.x_text = (int)(wall->x_wall * (double)(TEXT_WIDTH));
+	if ((ray->side == 0 && ray->dir.x > 0)
+		|| (ray->side == 1 && ray->dir.y < 0))
+		wolf->texture.x_text = TEXT_WIDTH - wolf->texture.x_text - 1;
+	y = wall->draw_start - 1;
+	//step = 1.0 * TEXT_HEIGHT / wall->line_height;
+	//text_pos = (wall->draw_start - 400 / 2 + wall->line_height / 2) * step;
+	while (++y < wall->draw_end)
+	{
+		d = y * 256 - h * 128 + wall->line_height * 128;
+		wolf->texture.y_text = ((d * TEXT_HEIGHT) / wall->line_height) / 256;
+	//	wolf->texture.y_text = (int)text_pos & (TEXT_HEIGHT - 1);
+	//	text_pos += step;
+
+				/// changer le calcule de color pour prendre le pixel correspondant dans
+				/// on a deja le bon x_text et y_text
+				/// wolf->texture.data (precedement loader dans la fonction load_texture dans draw_textures.c)
+				/// pour l'instant, on utilise une seule texture (il faut 1 structure texture par texture (duh))
+				/// du coup, faut changer la structure de texture, et de wolf, pour mettre autant de textures qu'on veut
+				/// idée : faire un tableau de t_textures dans wolf ?
+		color = wolf->texture.text_map[text_num][TEXT_HEIGHT
+				* wolf->texture.y_text + wolf->texture.x_text];
+		if (ray->side == 1)
+			color = (color >> 1) & 8355711;
+		wolf->mlx.img.data[wall->draw_start * WIDTH + x] = color;
+	}
+}
 void		ray_casting(t_wolf *wolf)
 {
 	int		x;
@@ -130,8 +139,8 @@ void		ray_casting(t_wolf *wolf)
 	{
 		init_ray(wolf, &ray, x, cam_x);
 		sending_laser_beam(wolf, &ray);
-		draw_wall(wolf, &ray, &wall, x);
+		init_wall(wolf, &ray, &wall);
+		textures(wolf, &ray, &wall, x);
 	}
 	mlx_put_image_to_window(wolf->mlx.mlx_ptr, wolf->mlx.win_ptr, wolf->mlx.img.ptr, 0, 0);
-
 }

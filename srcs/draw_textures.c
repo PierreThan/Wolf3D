@@ -33,7 +33,7 @@ void	load_textures(t_wolf *wolf)
 
 	a = 64;
 	b = 64;
-	wolf->texture.img = mlx_xpm_file_to_image(wolf->mlx, "textures/bitmap1",
+	wolf->texture.img = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr, "xpm_textures/wood.xpm",
 		&a, &b);
 	wolf->texture.data = mlx_get_data_addr(wolf->texture.img,
 		&wolf->texture.bpp, &wolf->texture.sizeline, &wolf->texture.endian);

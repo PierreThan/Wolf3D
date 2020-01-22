@@ -81,7 +81,7 @@ int			main(int ac, char **argv)
 		return (free_wolf(&wolf));
 	if (ft_display_window("wolf", &wolf) == 0)
 		return (free_wolf(&wolf));
-	ft_printf("wolf.player.dir.x = [%f], wolf.player.dir.y = [%f]\n", wolf.player.dir.x, wolf.player.dir.y);
+	init_texture(&wolf);
 	ray_casting(&wolf);
 	setup_controls(&wolf);
 	mlx_loop(wolf.mlx.mlx_ptr);
