@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 17:50:40 by pthan             #+#    #+#             */
-/*   Updated: 2020/01/17 14:04:48 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:00:16 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define FT_MAX(A, B) (((A) > (B)) ? (A) : (B))
 # define WHITE 0xFFFFFF
 # define BLUE 0x1152CB
+# define TEXT_HEIGHT 64
+# define TEXT_WIDTH 64
 
 // https://lodev.org/cgtutor/raycasting.html
 // http://forums.mediabox.fr/wiki/tutoriaux/flashplatform/affichage/3d/raycasting/theorie/01-introduction

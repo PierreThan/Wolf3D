@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 13:56:39 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/17 15:21:02 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:11:07 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	init_texture(t_wolf *wolf)
 	int		ycolor;
 	int		xycolor;
 
+	x = -1;
+	if (!(wolf->texture.buffer = (unsigned int**)malloc(sizeof(unsigned int *) * HEIGHT + 1)))
+		free_wolf(wolf);
+	while (++x <= HEIGHT)
+		if (!(wolf->texture.buffer[x] = (unsigned int*)malloc(sizeof(unsigned int) * WIDTH + 1)))
+			free_wolf(wolf);
 	x = -1;
 	while (++x < WIDTH)
 	{
