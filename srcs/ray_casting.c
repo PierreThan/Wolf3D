@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/22 18:56:47 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/23 14:44:12 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 				* wolf->texture.y_text + wolf->texture.x_text];
 		if (ray->side == 1)
 			color = (color >> 1) & 8355711;
-		wolf->mlx.img.data[wall->draw_start * WIDTH + x] = color;
+		wolf->mlx.img.data[y * WIDTH + x] = color;
 	}
 }
 void		ray_casting(t_wolf *wolf)
