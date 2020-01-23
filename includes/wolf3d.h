@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 17:50:40 by pthan             #+#    #+#             */
-/*   Updated: 2020/01/22 18:00:16 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/23 15:13:19 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 **		main.c
 */
 int				free_wolf(t_wolf *wolf);
+int				close_wolf(void *param);
 
 /*
 **		draw_textures.c

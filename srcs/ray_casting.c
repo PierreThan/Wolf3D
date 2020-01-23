@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/23 14:44:12 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/23 15:14:16 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ void		init_wall(t_wolf *wolf, t_ray *ray, t_wall *wall)
 
 static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 {
-	//double	step;
-	//double	text_pos;
 	int		y;
 	int		text_num;
 	unsigned int	color;
@@ -97,15 +95,10 @@ static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 		|| (ray->side == 1 && ray->dir.y < 0))
 		wolf->texture.x_text = TEXT_WIDTH - wolf->texture.x_text - 1;
 	y = wall->draw_start - 1;
-	//step = 1.0 * TEXT_HEIGHT / wall->line_height;
-	//text_pos = (wall->draw_start - 400 / 2 + wall->line_height / 2) * step;
 	while (++y < wall->draw_end)
 	{
 		d = y * 256 - h * 128 + wall->line_height * 128;
 		wolf->texture.y_text = ((d * TEXT_HEIGHT) / wall->line_height) / 256;
-	//	wolf->texture.y_text = (int)text_pos & (TEXT_HEIGHT - 1);
-	//	text_pos += step;
-
 				/// changer le calcule de color pour prendre le pixel correspondant dans
 				/// on a deja le bon x_text et y_text
 				/// wolf->texture.data (precedement loader dans la fonction load_texture dans draw_textures.c)
@@ -119,6 +112,7 @@ static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 		wolf->mlx.img.data[y * WIDTH + x] = color;
 	}
 }
+
 void		ray_casting(t_wolf *wolf)
 {
 	int		x;
