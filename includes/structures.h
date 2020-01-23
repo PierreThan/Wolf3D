@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 13:29:49 by pthan             #+#    #+#             */
-/*   Updated: 2020/01/22 18:45:55 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/23 15:24:03 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct	s_vector2d
 	double		y;
 }				t_vec2d;
 
-typedef struct s_matrix2_2d
+typedef struct	s_matrix2_2d
 {
 	double		a;
 	double		b;
@@ -52,17 +52,17 @@ typedef struct	s_player
 
 typedef struct	s_ray
 {
-	int			mapX;
-	int			mapY;
+	int			mapx;
+	int			mapy;
 	int			hit;
-	int			stepX;
-	int			stepY;
+	int			stepx;
+	int			stepy;
 	int			side;
-	double		perpWallDist;
+	double		perpwalldist;
 	t_vec2d		pos;
 	t_vec2d		dir;
-	t_vec2d		sideDist;
-	t_vec2d		deltaDist;
+	t_vec2d		sidedist;
+	t_vec2d		deltadist;
 	t_vec2d		end_in_map;
 }				t_ray;
 
@@ -98,7 +98,7 @@ typedef struct	s_wolf
 	char		**map;
 	double		move_speed;
 	double		rot_speed;
-    t_player    player;
+	t_player	player;
 	t_mlx		mlx;
 }				t_wolf;
 

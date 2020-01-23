@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 02:52:37 by pthan             #+#    #+#             */
-/*   Updated: 2020/01/14 19:15:12 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/23 15:18:54 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		close_wolf(void *param)
 	(void)param;
 	exit(0);
 }
+
 void	move(int key, t_wolf *wolf)
 {
 	int	new_x;

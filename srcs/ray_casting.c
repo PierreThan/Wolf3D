@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/23 15:14:16 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/23 15:24:30 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,42 @@ void		init_ray(t_wolf *wolf, t_ray *ray, int x, double cam_x)
 	cam_x = 2 * x / (double)(WIDTH) - 1;
 	ray->dir.x = wolf->player.dir.x + wolf->player.plane.x * cam_x;
 	ray->dir.y = wolf->player.dir.y + wolf->player.plane.y * cam_x;
-	ray->mapX = (int)wolf->player.pos.x;
-	ray->mapY = (int)wolf->player.pos.y;
+	ray->mapx = (int)wolf->player.pos.x;
+	ray->mapy = (int)wolf->player.pos.y;
 	ray->pos.x = wolf->player.pos.x;
 	ray->pos.y = wolf->player.pos.y;
-	ray->deltaDist.x = sqrt(1 + (ray->dir.y * ray->dir.y) / (ray->dir.x * ray->dir.x));
-	ray->deltaDist.y = sqrt(1 + (ray->dir.x * ray->dir.x) / (ray->dir.y * ray->dir.y));
+	ray->deltadist.x = sqrt(1 + (ray->dir.y * ray->dir.y) / (ray->dir.x * ray->dir.x));
+	ray->deltadist.y = sqrt(1 + (ray->dir.x * ray->dir.x) / (ray->dir.y * ray->dir.y));
 	ray->hit = 0;
-	ray->stepX = (ray->dir.x >= 0) - (ray->dir.x < 0);
-	ray->stepY = (ray->dir.y >= 0) - (ray->dir.y < 0);
+	ray->stepx = (ray->dir.x >= 0) - (ray->dir.x < 0);
+	ray->stepy = (ray->dir.y >= 0) - (ray->dir.y < 0);
 	if (ray->dir.x < 0)
-		ray->sideDist.x = (wolf->player.pos.x - ray->mapX) * ray->deltaDist.x;
+		ray->sidedist.x = (wolf->player.pos.x - ray->mapx) * ray->deltadist.x;
 	else
-		ray->sideDist.x = (ray->mapX + 1.0 - wolf->player.pos.x) * ray->deltaDist.x;
+		ray->sidedist.x = (ray->mapx + 1.0 - wolf->player.pos.x) * ray->deltadist.x;
 	if (ray->dir.y < 0)
-		ray->sideDist.y = (wolf->player.pos.y - ray->mapY) * ray->deltaDist.y;
+		ray->sidedist.y = (wolf->player.pos.y - ray->mapy) * ray->deltadist.y;
 	else
-		ray->sideDist.y = (ray->mapY + 1.0 - wolf->player.pos.y) * ray->deltaDist.y;
+		ray->sidedist.y = (ray->mapy + 1.0 - wolf->player.pos.y) * ray->deltadist.y;
 }
 
 void		sending_laser_beam(t_wolf *wolf, t_ray *ray)
 {
 	while (ray->hit == 0)
 	{
-		if (ray->sideDist.x < ray->sideDist.y)
+		if (ray->sidedist.x < ray->sidedist.y)
 		{
-			ray->sideDist.x += ray->deltaDist.x;
-			ray->mapX += ray->stepX;
+			ray->sidedist.x += ray->deltadist.x;
+			ray->mapx += ray->stepx;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->sideDist.y += ray->deltaDist.y;
-			ray->mapY += ray->stepY;
+			ray->sidedist.y += ray->deltadist.y;
+			ray->mapy += ray->stepy;
 			ray->side = 1;
 		}
-		if (wolf->map[ray->mapX][ray->mapY] == '1')
+		if (wolf->map[ray->mapx][ray->mapy] == '1')
 			ray->hit = 1;
 	}
 }
@@ -63,10 +63,10 @@ void		init_wall(t_wolf *wolf, t_ray *ray, t_wall *wall)
 
 	h = 400;
 	if (ray->side == 0)
-		ray->perpWallDist = (ray->mapX - wolf->player.pos.x + (1 - ray->stepX) / 2 ) / ray->dir.x;
+		ray->perpwalldist = (ray->mapx - wolf->player.pos.x + (1 - ray->stepx) / 2 ) / ray->dir.x;
 	else
-		ray->perpWallDist = (ray->mapY - wolf->player.pos.y + (1 - ray->stepY) / 2) / ray->dir.y;
-	wall->line_height = (int)((double)h / ray->perpWallDist);
+		ray->perpwalldist = (ray->mapy - wolf->player.pos.y + (1 - ray->stepy) / 2) / ray->dir.y;
+	wall->line_height = (int)((double)h / ray->perpwalldist);
 	wall->draw_start = h / 2 - wall->line_height / 2;
 	if (wall->draw_start < 0)
 		wall->draw_start = 0;
@@ -84,11 +84,11 @@ static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 	int				h;
 
 	h = 400;
-	text_num = wolf->map[ray->mapX][ray->mapY] - 49;
+	text_num = wolf->map[ray->mapx][ray->mapy] - 49;
 	if (ray->side == 0)
-		wall->x_wall = wolf->player.pos.y + ray->perpWallDist * ray->dir.y;
+		wall->x_wall = wolf->player.pos.y + ray->perpwalldist * ray->dir.y;
 	else
-		wall->x_wall = wolf->player.pos.x + ray->perpWallDist * ray->dir.x;
+		wall->x_wall = wolf->player.pos.x + ray->perpwalldist * ray->dir.x;
 	wall->x_wall -= floor((wall->x_wall));
 	wolf->texture.x_text = (int)(wall->x_wall * (double)(TEXT_WIDTH));
 	if ((ray->side == 0 && ray->dir.x > 0)
