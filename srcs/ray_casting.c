@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/23 15:24:30 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:09:52 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,23 @@ void		init_ray(t_wolf *wolf, t_ray *ray, int x, double cam_x)
 	ray->mapy = (int)wolf->player.pos.y;
 	ray->pos.x = wolf->player.pos.x;
 	ray->pos.y = wolf->player.pos.y;
-	ray->deltadist.x = sqrt(1 + (ray->dir.y * ray->dir.y) / (ray->dir.x * ray->dir.x));
-	ray->deltadist.y = sqrt(1 + (ray->dir.x * ray->dir.x) / (ray->dir.y * ray->dir.y));
+	ray->deltadist.x = sqrt(1 + (ray->dir.y * ray->dir.y)
+		/ (ray->dir.x * ray->dir.x));
+	ray->deltadist.y = sqrt(1 + (ray->dir.x * ray->dir.x)
+		/ (ray->dir.y * ray->dir.y));
 	ray->hit = 0;
 	ray->stepx = (ray->dir.x >= 0) - (ray->dir.x < 0);
 	ray->stepy = (ray->dir.y >= 0) - (ray->dir.y < 0);
 	if (ray->dir.x < 0)
 		ray->sidedist.x = (wolf->player.pos.x - ray->mapx) * ray->deltadist.x;
 	else
-		ray->sidedist.x = (ray->mapx + 1.0 - wolf->player.pos.x) * ray->deltadist.x;
+		ray->sidedist.x = (ray->mapx + 1.0 - wolf->player.pos.x)
+			* ray->deltadist.x;
 	if (ray->dir.y < 0)
 		ray->sidedist.y = (wolf->player.pos.y - ray->mapy) * ray->deltadist.y;
 	else
-		ray->sidedist.y = (ray->mapy + 1.0 - wolf->player.pos.y) * ray->deltadist.y;
+		ray->sidedist.y = (ray->mapy + 1.0 - wolf->player.pos.y)
+			* ray->deltadist.y;
 }
 
 void		sending_laser_beam(t_wolf *wolf, t_ray *ray)
@@ -63,28 +67,24 @@ void		init_wall(t_wolf *wolf, t_ray *ray, t_wall *wall)
 
 	h = 400;
 	if (ray->side == 0)
-		ray->perpwalldist = (ray->mapx - wolf->player.pos.x + (1 - ray->stepx) / 2 ) / ray->dir.x;
+		ray->perpwalldist = (ray->mapx - wolf->player.pos.x
+			+ (1 - ray->stepx) / 2) / ray->dir.x;
 	else
-		ray->perpwalldist = (ray->mapy - wolf->player.pos.y + (1 - ray->stepy) / 2) / ray->dir.y;
+		ray->perpwalldist = (ray->mapy - wolf->player.pos.y
+			+ (1 - ray->stepy) / 2) / ray->dir.y;
 	wall->line_height = (int)((double)h / ray->perpwalldist);
 	wall->draw_start = h / 2 - wall->line_height / 2;
 	if (wall->draw_start < 0)
 		wall->draw_start = 0;
 	wall->draw_end = h / 2 + wall->line_height / 2;
 	if (wall->draw_end >= h)
-		wall->draw_end =  h - 1;
+		wall->draw_end = h - 1;
 }
 
 static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 {
-	int		y;
-	int		text_num;
-	unsigned int	color;
-	int				d;
-	int				h;
-
-	h = 400;
-	text_num = wolf->map[ray->mapx][ray->mapy] - 49;
+	wolf->texture.h = 400;
+	wolf->texture.text_num = wolf->map[ray->mapx][ray->mapy] - 49;
 	if (ray->side == 0)
 		wall->x_wall = wolf->player.pos.y + ray->perpwalldist * ray->dir.y;
 	else
@@ -94,22 +94,25 @@ static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 	if ((ray->side == 0 && ray->dir.x > 0)
 		|| (ray->side == 1 && ray->dir.y < 0))
 		wolf->texture.x_text = TEXT_WIDTH - wolf->texture.x_text - 1;
-	y = wall->draw_start - 1;
-	while (++y < wall->draw_end)
+	wolf->texture.y = wall->draw_start - 1;
+	while (++wolf->texture.y < wall->draw_end)
 	{
-		d = y * 256 - h * 128 + wall->line_height * 128;
-		wolf->texture.y_text = ((d * TEXT_HEIGHT) / wall->line_height) / 256;
+		wolf->texture.d = wolf->texture.y * 256
+			- wolf->texture.h * 128 + wall->line_height * 128;
+		wolf->texture.y_text = ((wolf->texture.d * TEXT_HEIGHT)
+			/ wall->line_height) / 256;
 				/// changer le calcule de color pour prendre le pixel correspondant dans
 				/// on a deja le bon x_text et y_text
 				/// wolf->texture.data (precedement loader dans la fonction load_texture dans draw_textures.c)
 				/// pour l'instant, on utilise une seule texture (il faut 1 structure texture par texture (duh))
 				/// du coup, faut changer la structure de texture, et de wolf, pour mettre autant de textures qu'on veut
 				/// idée : faire un tableau de t_textures dans wolf ?
-		color = wolf->texture.text_map[text_num][TEXT_HEIGHT
+		wolf->texture.color =
+			wolf->texture.text_map[wolf->texture.text_num][TEXT_HEIGHT
 				* wolf->texture.y_text + wolf->texture.x_text];
 		if (ray->side == 1)
-			color = (color >> 1) & 8355711;
-		wolf->mlx.img.data[y * WIDTH + x] = color;
+			wolf->texture.color = (wolf->texture.color >> 1) & 8355711;
+		wolf->mlx.img.data[wolf->texture.y * WIDTH + x] = wolf->texture.color;
 	}
 }
 
@@ -136,5 +139,6 @@ void		ray_casting(t_wolf *wolf)
 		init_wall(wolf, &ray, &wall);
 		textures(wolf, &ray, &wall, x);
 	}
-	mlx_put_image_to_window(wolf->mlx.mlx_ptr, wolf->mlx.win_ptr, wolf->mlx.img.ptr, 0, 0);
+	mlx_put_image_to_window(wolf->mlx.mlx_ptr
+		, wolf->mlx.win_ptr, wolf->mlx.img.ptr, 0, 0);
 }

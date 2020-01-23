@@ -6,100 +6,105 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 13:29:49 by pthan             #+#    #+#             */
-/*   Updated: 2020/01/23 15:24:03 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:12:07 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-typedef struct	s_img
+typedef struct		s_img
 {
-	int			size_l;
-	int			bpp;
-	int			endian;
-	void		*ptr;
-	int			*data;
-}				t_img;
+	int				size_l;
+	int				bpp;
+	int				endian;
+	void			*ptr;
+	int				*data;
+}					t_img;
 
-typedef struct	s_mlx
+typedef struct		s_mlx
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_img		img;
-}				t_mlx;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	t_img			img;
+}					t_mlx;
 
-typedef struct	s_vector2d
+typedef struct		s_vector2d
 {
-	double		x;
-	double		y;
-}				t_vec2d;
+	double			x;
+	double			y;
+}					t_vec2d;
 
-typedef struct	s_matrix2_2d
+typedef struct		s_matrix2_2d
 {
-	double		a;
-	double		b;
-	double		c;
-	double		d;
-}				t_mat2d;
+	double			a;
+	double			b;
+	double			c;
+	double			d;
+}					t_mat2d;
 
-typedef struct	s_player
+typedef struct		s_player
 {
-	t_vec2d		pos;
-	t_vec2d		dir;
-	t_vec2d		plane;
-}				t_player;
+	t_vec2d			pos;
+	t_vec2d			dir;
+	t_vec2d			plane;
+}					t_player;
 
-typedef struct	s_ray
+typedef struct		s_ray
 {
-	int			mapx;
-	int			mapy;
-	int			hit;
-	int			stepx;
-	int			stepy;
-	int			side;
-	double		perpwalldist;
-	t_vec2d		pos;
-	t_vec2d		dir;
-	t_vec2d		sidedist;
-	t_vec2d		deltadist;
-	t_vec2d		end_in_map;
-}				t_ray;
+	int				mapx;
+	int				mapy;
+	int				hit;
+	int				stepx;
+	int				stepy;
+	int				side;
+	double			perpwalldist;
+	t_vec2d			pos;
+	t_vec2d			dir;
+	t_vec2d			sidedist;
+	t_vec2d			deltadist;
+	t_vec2d			end_in_map;
+}					t_ray;
 
-typedef struct	s_wall
+typedef struct		s_wall
 {
-	int			line_height;
-	int			draw_start;
-	int			draw_end;
-	double		x_wall;
-}				t_wall;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	double			x_wall;
+}					t_wall;
 
-typedef struct	s_texture
+typedef struct		s_texture
 {
-	void		*img;
-	char		*data;
-	int			bpp;
-	int			sizeline;
-	int			endian;
-	int			**text_map;
-	int			x_text;
-	int			y_text;
-}				t_texture;
+	void			*img;
+	char			*data;
+	int				bpp;
+	int				sizeline;
+	int				endian;
+	int				**text_map;
+	int				x_text;
+	int				y_text;
+	int				text_num;
+	int				d;
+	int				h;
+	int				y;
+	unsigned int	color;
+}					t_texture;
 
-typedef struct	s_wolf
+typedef struct		s_wolf
 {
-	t_texture	texture;
-	int			x_texture;
-	int			y_texture;
-	int			color;
-	int			fd;
-	int			height;
-	int			width;
-	char		**map;
-	double		move_speed;
-	double		rot_speed;
-	t_player	player;
-	t_mlx		mlx;
-}				t_wolf;
+	t_texture		texture;
+	int				x_texture;
+	int				y_texture;
+	int				color;
+	int				fd;
+	int				height;
+	int				width;
+	char			**map;
+	double			move_speed;
+	double			rot_speed;
+	t_player		player;
+	t_mlx			mlx;
+}					t_wolf;
 
 #endif
