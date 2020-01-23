@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:43:52 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/23 15:13:28 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/23 15:56:51 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ static int	check_input(int ac, char **argv, t_wolf *wolf)
 	}
 	ft_printf("usage error");
 	return (0);
+}
+
+int			close_wolf(void *param)
+{
+	free_wolf((t_wolf *)param);
+	(void)param;
+	exit(0);
 }
 
 int			free_wolf(t_wolf *wolf)
