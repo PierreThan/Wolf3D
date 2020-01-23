@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector2d.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/23 15:38:32 by atyczyns          #+#    #+#             */
+/*   Updated: 2020/01/23 15:43:06 by atyczyns         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/wolf3d.h"
 
 t_vec2d		*vec2d_create(double x, double y)
@@ -53,13 +65,4 @@ void		vec2d_normalize(t_vec2d *vect)
 		vect->x /= vect->y;
 		vect->y = 1.00000;
 	}
-}
-
-void		vec2d_mat2d_mult(t_vec2d *vec, t_mat2d *mat)
-{
-	double	tmp;
-
-	tmp = vec->x;
-	vec->x = (vec->x * mat->a) + (mat->b * vec->y);
-	vec->y = (tmp * mat->c) + (mat->d * vec->y);
 }

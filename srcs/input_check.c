@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_check.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/23 15:34:31 by atyczyns          #+#    #+#             */
+/*   Updated: 2020/01/23 15:36:53 by atyczyns         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
@@ -94,42 +105,11 @@ int		get_file(t_wolf *wolf, char **argv)
 	return (0);
 }
 
-int		init_player(t_wolf *wolf)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < wolf->width)
-	{
-		j = 0;
-		while (j < wolf->height)
-		{
-			if (wolf->map[i][j] == '0')
-			{
-				wolf->player.pos.x = i;
-				wolf->player.pos.x += 0.5;
-				wolf->player.pos.y = j;
-				wolf->player.pos.y += 0.5;
-				wolf->player.dir.x = 1;
-				wolf->player.dir.y = 1;
-				wolf->player.plane.x = 0;
-				wolf->player.plane.y = 0.66;
-				return (1);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
 int		parse_file(t_wolf *wolf, char **argv)
 {
 	int	i;
-	int	j;
 
-	i = 0;
+	i = -1;
 	wolf->height = 0;
 	wolf->width = 0;
 	if (!get_dimensions(wolf))
@@ -140,31 +120,14 @@ int		parse_file(t_wolf *wolf, char **argv)
 	if (!(wolf->map =
 			(char **)ft_memalloc(wolf->width * sizeof(char *))))
 		return (0);
-	while (i < wolf->width)
-	{
+	while (++i < wolf->width)
 		if (!(wolf->map[i] = ft_strnew(wolf->height)))
 			return (0);
-		i++;
-	}
 	if (get_file(wolf, argv) == 0)
 	{
 		ft_printf("parsing problem\n");
 		return (0);
 	}
-	j = 0;
-	/*AFFICHAGE
-	while (j < wolf->height)
-	{
-		i = 0;
-		while (i < wolf->width)
-		{
-			ft_putchar(wolf->map[i][j]);
-			ft_putchar(' ');
-			i++;
-		}
-		ft_putchar('\n');
-		j++;
-	}*/
 	if (init_player(wolf))
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 17:50:40 by pthan             #+#    #+#             */
-/*   Updated: 2020/01/23 15:29:11 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/01/23 15:44:09 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void			init_texture(t_wolf *wolf);
 **		input_check.c
 */
 
+int				init_player(t_wolf *wolf);
 int				parse_file(t_wolf *wolf, char **argv);
 
 /*
