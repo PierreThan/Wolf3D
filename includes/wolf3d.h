@@ -23,8 +23,6 @@
 
 # define WIDTH 640
 # define HEIGHT 400
-# define FT_MIN(A, B) (((A) < (B)) ? (A) : (B))
-# define FT_MAX(A, B) (((A) > (B)) ? (A) : (B))
 # define WHITE 0xFFFFFF
 # define BLUE 0x1152CB
 # define TEXT_HEIGHT 64
@@ -32,7 +30,8 @@
 
 /*
 ** https://lodev.org/cgtutor/raycasting.html
-** http://forums.mediabox.fr/wiki/tutoriaux/flashplatform/affichage/3d/raycasting/theorie/01-introduction
+** http://forums.mediabox.fr/wiki/tutoriaux/flashplatform/
+**                  affichage/3d/raycasting/theorie/01-introduction
 ** https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/
 */
 
@@ -44,10 +43,11 @@ int				free_wolf(t_wolf *wolf);
 int				close_wolf(void *param);
 
 /*
-**		draw_textures.c
+**		textures.c
 */
 
 void			init_texture(t_wolf *wolf);
+void            free_texture(t_wolf *wolf);
 void			floor_ceiling(t_wolf *wolf);
 
 /*

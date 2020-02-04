@@ -55,6 +55,7 @@ int			free_wolf(t_wolf *wolf)
 					ft_strdel(&(wolf->map[i]));
 			ft_memdel((void **)(&(wolf->map)));
 		}
+		free_textures(wolf);
 	}
 	return (0);
 }

@@ -53,3 +53,22 @@ void	init_texture(t_wolf *wolf)
 		}
 	}
 }
+
+void	free_textures(t_wolf *wolf)
+{
+	int	i;
+
+	i = -1;
+	if (wolf)
+	{
+		if (wolf->texture.text_map)
+		{
+			while (++i < 8)
+			{
+				if (wolf->texture.text_map[i])
+					ft_memdel(wolf->texture.text_map[i]);
+			}
+			ft_memdel(wolf->texture.text_map);
+		}
+	}
+}
