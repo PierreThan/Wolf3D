@@ -49,14 +49,20 @@ void	get_flags(t_printf *pf)
 void	get_min_len(t_printf *pf)
 {
 	if (*pf->format >= 48 && *pf->format <= 57)
-		pf->min_len = MAX(ft_atoi(pf->format), 1);
+	{
+		if (ft_atoi(pf->format) > 1)
+			pf->min_len = ft_atoi(pf->format);
+		else
+			pf->min_len = 1;
+	}
 	if (*pf->format == '*')
 	{
 		pf->format++;
 		pf->min_len = va_arg(pf->ap, int);
 		if (pf->min_len < 0)
 			(pf->flags |= F_MINUS) && (pf->flags &= ~F_ZERO);
-		pf->min_len = ABS(pf->min_len);
+		if (pf->min_len < 0)
+			pf->min_len = -pf->min_len;
 	}
 	while (*pf->format >= 48 && *pf->format <= 57)
 		pf->format++;

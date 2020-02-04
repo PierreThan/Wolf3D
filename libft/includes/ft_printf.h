@@ -18,9 +18,8 @@
 
 /*
 ** To generate the same warnings as the real printf :
+**# define PRINTFRET __attribute__ ((__format__(printf, 1, 2))) int
 */
-
-# define PRINTFRET __attribute__ ((__format__(printf, 1, 2))) int
 
 /*
 ** -------------------------------- FLAGS --------------------------------
@@ -34,11 +33,11 @@
 ** F_ZERO  (1 << 4) --> '0'   0000 0001 0000  -->  '0' padding
 */
 
-# define F_HASH  (1 << 0)
-# define F_SPACE (1 << 1)
-# define F_PLUS  (1 << 2)
-# define F_MINUS (1 << 3)
-# define F_ZERO  (1 << 4)
+# define F_HASH  1
+# define F_SPACE 2
+# define F_PLUS  4
+# define F_MINUS 8
+# define F_ZERO  16
 
 /*
 ** --------------------------- LENGTH MODIFIERS --------------------------
@@ -54,22 +53,22 @@
 ** LM_LONG2  (1 << 11) --> 'll'  1000 0000 0000  -->  long long int/uint
 */
 
-# define LM_SHORT  (1 << 5)
-# define LM_LONG   (1 << 6)
-# define LM_DOUBLE (1 << 7)
-# define LM_INTMAX (1 << 8)
-# define LM_SIZE_T (1 << 9)
-# define LM_CHAR   (1 << 10)
-# define LM_LONG2  (1 << 11)
+# define LM_SHORT  32
+# define LM_LONG   64
+# define LM_DOUBLE 128
+# define LM_INTMAX 256
+# define LM_SIZE_T 512
+# define LM_CHAR   1024
+# define LM_LONG2  2048
 
 /*
 ** -------------------------------- BASES --------------------------------
 */
 
 # define B_DEC 10
-# define B_BIN (1 << 1)
-# define B_OCT (1 << 3)
-# define B_HEX (1 << 4)
+# define B_BIN 2
+# define B_OCT 8
+# define B_HEX 16
 
 /*
 ** -------------------------------- COLORS -------------------------------
@@ -119,7 +118,7 @@ typedef struct	s_conv
 ** ------------------------------- PRINTF -------------------------------
 */
 
-PRINTFRET		ft_printf(const char *format, ...);
+int				ft_printf(const char *format, ...);
 int				ft_dprintf(int fd, const char *format, ...);
 
 void			reset_struct(t_printf *pf);

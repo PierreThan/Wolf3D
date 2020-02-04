@@ -19,8 +19,6 @@
 # include <stdio.h>
 # include "get_next_line.h"
 # include "ft_printf.h"
-# define ABS(Value)  (Value < 0) ? -Value : Value
-# define MAX(a, b)   a > b ? a : b
 
 typedef struct		s_list
 {
