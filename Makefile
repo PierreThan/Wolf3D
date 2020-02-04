@@ -6,7 +6,7 @@
 #    By: pthan <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/30 20:01:11 by pthan             #+#    #+#              #
-#    Updated: 2020/01/23 15:46:06 by atyczyns         ###   ########.fr        #
+#    Updated: 2020/02/04 15:42:18 by atyczyns         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRC_NAME		= 	main.c \
 					ray_casting.c \
 					textures.c \
 					input_check_bis.c \
-					vector2d_bis.c
+					vector2d_bis.c \
+					floor_ceiling.c
 
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

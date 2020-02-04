@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 17:50:40 by pthan             #+#    #+#             */
-/*   Updated: 2020/01/23 15:44:09 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/02/04 16:16:02 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int				close_wolf(void *param);
 */
 
 void			init_texture(t_wolf *wolf);
+void			floor_ceiling(t_wolf *wolf);
 
 /*
 **		input_check.c

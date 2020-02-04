@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 13:29:49 by pthan             #+#    #+#             */
-/*   Updated: 2020/01/23 16:12:07 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/02/04 16:07:53 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,28 @@ typedef struct		s_texture
 	unsigned int	color;
 }					t_texture;
 
+typedef struct		s_floor
+{
+	float			ray_dir_x0;
+	float			ray_dir_y0;
+	float			ray_dir_y1;
+	float			ray_dir_x1;
+	int				p;
+	float			pos_z;;
+	float			row_distance;
+	float			floorstep_x;
+	float			floorstep_y;
+	float			floor_x;
+	float			floor_y;
+	int				cell_x;
+	int				cell_y;
+	int				t_x;
+	int				t_y;
+	int				floor_text;
+	int				ceiling_text;
+	unsigned int	color;
+}					t_floor;
+
 typedef struct		s_wolf
 {
 	t_texture		texture;
@@ -105,6 +127,7 @@ typedef struct		s_wolf
 	double			rot_speed;
 	t_player		player;
 	t_mlx			mlx;
+	t_floor			floor;
 }					t_wolf;
 
 #endif
