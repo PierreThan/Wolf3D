@@ -12,7 +12,9 @@
 
 #include "../includes/wolf3d.h"
 
-//a proteger -> verifier les retours des fncs mlx
+/*
+**a proteger -> verifier les retours des fncs mlx
+*/
 
 int		ft_display_window(char *title, t_wolf *wolf)
 {
@@ -113,5 +115,8 @@ void	setup_controls(t_wolf *wolf)
 {
 	mlx_hook(wolf->mlx.win_ptr, 2, 0, key_press, wolf);
 	mlx_hook(wolf->mlx.win_ptr, 17, 0, close_wolf, wolf);
-	//mlx_hook(wolf->mlx.win_ptr, 4, 0, mouse_press, wolf);
 }
+
+/*
+**mlx_hook(wolf->mlx.win_ptr, 4, 0, mouse_press, wolf);
+*/

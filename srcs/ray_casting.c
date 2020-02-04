@@ -101,12 +101,6 @@ static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 			- wolf->texture.h * 128 + wall->line_height * 128;
 		wolf->texture.y_text = ((wolf->texture.d * TEXT_HEIGHT)
 			/ wall->line_height) / 256;
-				/// changer le calcule de color pour prendre le pixel correspondant dans
-				/// on a deja le bon x_text et y_text
-				/// wolf->texture.data (precedement loader dans la fonction load_texture dans draw_textures.c)
-				/// pour l'instant, on utilise une seule texture (il faut 1 structure texture par texture (duh))
-				/// du coup, faut changer la structure de texture, et de wolf, pour mettre autant de textures qu'on veut
-				/// idée : faire un tableau de t_textures dans wolf ?
 		wolf->texture.color =
 			wolf->texture.text_map[wolf->texture.text_num][TEXT_HEIGHT
 				* wolf->texture.y_text + wolf->texture.x_text];
@@ -115,6 +109,15 @@ static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 		wolf->mlx.img.data[wolf->texture.y * WIDTH + x] = wolf->texture.color;
 	}
 }
+
+/*
+** changer le calcule de color pour prendre le pixel correspondant dans le xml
+** wolf->texture.data (prec. loader ds la fnc load_texture ds draw_textures.c)
+** pour l'instant, on utilise une seule tex (il faut 1 struct tex par tex)
+** du coup, faut changer les struct tex et wolf,
+** pour mettre le nb de tex quon veut
+** idée : faire un tableau de t_textures dans wolf ?
+*/
 
 void		ray_casting(t_wolf *wolf)
 {
