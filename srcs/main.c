@@ -84,7 +84,6 @@ int			main(int ac, char **argv)
 
 	init_wolf(&wolf);
 	wolf.player.dir.x = 1;
-	printf("wolf.player.dir.x = [%f]\n", wolf.player.dir.x);
 	if (check_input(ac, argv, &wolf) == 0)
 		return (free_wolf(&wolf));
 	if (ft_display_window("wolf", &wolf) == 0)
