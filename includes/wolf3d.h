@@ -47,7 +47,7 @@ int				close_wolf(void *param);
 */
 
 void			init_texture(t_wolf *wolf);
-void            free_texture(t_wolf *wolf);
+void            free_textures(t_wolf *wolf);
 void			floor_ceiling(t_wolf *wolf);
 
 /*

@@ -101,12 +101,17 @@ static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 			- wolf->texture.h * 128 + wall->line_height * 128;
 		wolf->texture.y_text = ((wolf->texture.d * TEXT_HEIGHT)
 			/ wall->line_height) / 256;
-		wolf->texture.color =
+		/*wolf->texture.color =
 			wolf->texture.text_map[wolf->texture.text_num][TEXT_HEIGHT
+				* wolf->texture.y_text + wolf->texture.x_text];
+		*/
+		wolf->texture.color =
+			wolf->texture.data[TEXT_HEIGHT
 				* wolf->texture.y_text + wolf->texture.x_text];
 		if (ray->side == 1)
 			wolf->texture.color = (wolf->texture.color >> 1) & 8355711;
 		wolf->mlx.img.data[wolf->texture.y * WIDTH + x] = wolf->texture.color;
+		(void)x;
 	}
 }
 

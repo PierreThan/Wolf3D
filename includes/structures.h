@@ -77,8 +77,10 @@ typedef struct		s_wall
 typedef struct		s_texture
 {
 	void			*img;
-	char			*data;
+	unsigned int	*data;
 	int				bpp;
+	int				width;
+	int				height;
 	int				sizeline;
 	int				endian;
 	int				**text_map;

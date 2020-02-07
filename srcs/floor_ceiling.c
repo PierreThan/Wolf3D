@@ -44,6 +44,7 @@ void			floor_ceiling(t_wolf *wolf)
 {
 	int		y;
 
+	y = 0;
 	wolf->texture.h = 400;
 	while (++y < wolf->texture.h)
 	{

@@ -50,6 +50,11 @@ void	init_texture(t_wolf *wolf)
 			wolf->texture.text_map[6][TEXT_WIDTH * y + x] = 65536 * ycolor;
 			wolf->texture.text_map[7][TEXT_WIDTH * y + x] 
 				= 128 + 256 * 128 + 65536 * 128;
+			wolf->texture.width = 64;
+			wolf->texture.height = 64;
+			wolf->texture.img = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr,
+			"./xpm_textures/brick.xpm", &(wolf->texture.width), &(wolf->texture.height));
+			wolf->texture.data = (unsigned int*)mlx_get_data_addr(wolf->texture.img, &(wolf->texture.bpp), &(wolf->texture.sizeline), &(wolf->texture.endian));
 		}
 	}
 }
@@ -66,9 +71,10 @@ void	free_textures(t_wolf *wolf)
 			while (++i < 8)
 			{
 				if (wolf->texture.text_map[i])
-					ft_memdel(wolf->texture.text_map[i]);
+					ft_memdel((void**)(&wolf->texture.text_map[i]));
 			}
-			ft_memdel(wolf->texture.text_map);
+			ft_memdel((void**)(&wolf->texture.text_map));
 		}
 	}
 }
+
