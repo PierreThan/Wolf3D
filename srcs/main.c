@@ -40,13 +40,6 @@ int			free_wolf(t_wolf *wolf)
 
 	if (wolf)
 	{
-		if (wolf->mlx.mlx_ptr)
-		{
-			if (wolf->mlx.img.ptr)
-				mlx_destroy_image(wolf->mlx.mlx_ptr, wolf->mlx.img.ptr);
-			if (wolf->mlx.mlx_ptr)
-				mlx_destroy_window(wolf->mlx.mlx_ptr, wolf->mlx.win_ptr);
-		}
 		if (wolf->map)
 		{
 			i = -1;
@@ -56,15 +49,19 @@ int			free_wolf(t_wolf *wolf)
 			ft_memdel((void **)(&(wolf->map)));
 		}
 		free_textures(wolf);
+		if (wolf->mlx.mlx_ptr)
+		{
+			if (wolf->mlx.img.ptr)
+				mlx_destroy_image(wolf->mlx.mlx_ptr, wolf->mlx.img.ptr);
+			if (wolf->mlx.mlx_ptr)
+				mlx_destroy_window(wolf->mlx.mlx_ptr, wolf->mlx.win_ptr);
+		}
 	}
 	return (0);
 }
 
 void		init_wolf(t_wolf *wolf)
 {
-	wolf->x_texture = 0;
-	wolf->y_texture = 0;
-	wolf->color = 0;
 	wolf->fd = 0;
 	wolf->height = 0;
 	wolf->width = 0;
@@ -74,8 +71,8 @@ void		init_wolf(t_wolf *wolf)
 	wolf->player.dir.y = 1;
 	wolf->player.plane.x = 0;
 	wolf->player.plane.y = 0;
-	wolf->move_speed = 0.055;
-	wolf->rot_speed = 0.03;
+	wolf->move_speed = 0.07;
+	wolf->rot_speed = 0.035;
 }
 
 int			main(int ac, char **argv)
