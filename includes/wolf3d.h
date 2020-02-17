@@ -22,11 +22,31 @@
 # include <mlx.h>
 
 # define WIDTH 640
-# define HEIGHT 400
+# define HEIGHT 480
 # define WHITE 0xFFFFFF
 # define BLUE 0x1152CB
 # define TEXT_HEIGHT 64
 # define TEXT_WIDTH 64
+
+/*
+** define BRICK "./xpm_textures/brick.xpm" = 1
+** define REDBRICK "./xpm_textures/redbrick.xpm" = 2
+** define WOOD "./xpm_textures/wood.xpm" = 3
+** define MOSSY "./xpm_textures/mossy.xpm" = 4
+** define COLORSTONE "./xpm_textures/colorstone.xpm" = 5
+** define GREYSTONE "./xpm_textures/greystone.xpm" = 6
+** define BLUESTONE "./xpm_textures/bluestone.xpm" = 7
+** efine PURPLESTONE "./xpm_textures/purplestone.xpm" = 8
+*/
+
+# define BRICK "./xpm_textures/brick.xpm"
+# define REDBRICK "./xpm_textures/redbrick.xpm"
+# define WOOD "./xpm_textures/wood.xpm"
+# define MOSSY "./xpm_textures/mossy.xpm"
+# define COLORSTONE "./xpm_textures/colorstone.xpm"
+# define GREYSTONE "./xpm_textures/greystone.xpm"
+# define BLUESTONE "./xpm_textures/bluestone.xpm"
+# define PURPLESTONE "./xpm_textures/purplestone.xpm"
 
 /*
 ** https://lodev.org/cgtutor/raycasting.html
@@ -47,7 +67,7 @@ int				close_wolf(void *param);
 */
 
 void			init_texture(t_wolf *wolf);
-void            free_textures(t_wolf *wolf);
+void			free_textures(t_wolf *wolf);
 void			floor_ceiling(t_wolf *wolf);
 
 /*
