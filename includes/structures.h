@@ -13,6 +13,8 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
+# define NB_TEXTURES 8
+
 typedef struct		s_img
 {
 	int				size_l;
@@ -74,25 +76,6 @@ typedef struct		s_wall
 	double			x_wall;
 }					t_wall;
 
-typedef struct		s_texture
-{
-	void			*img;
-	unsigned int	*data;
-	int				bpp;
-	int				width;
-	int				height;
-	int				sizeline;
-	int				endian;
-	int				**text_map;
-	int				x_text;
-	int				y_text;
-	int				text_num;
-	int				d;
-	int				h;
-	int				y;
-	unsigned int	color;
-}					t_texture;
-
 typedef struct		s_floor
 {
 	float			ray_dir_x0;
@@ -115,20 +98,31 @@ typedef struct		s_floor
 	unsigned int	color;
 }					t_floor;
 
+typedef struct		s_texture
+{
+	t_img			*img;
+	int				width;
+	int				height;
+	int				x_text;
+	int				y_text;
+	int				text_num;
+	int				d;
+	int				h;
+	int				y;
+	unsigned int	color;
+}					t_texture;
+
 typedef struct		s_wolf
 {
-	t_texture		texture;
-	int				x_texture;
-	int				y_texture;
-	int				color;
 	int				fd;
 	int				height;
 	int				width;
 	char			**map;
 	double			move_speed;
 	double			rot_speed;
-	t_player		player;
 	t_mlx			mlx;
+	t_texture		texture;
+	t_player		player;
 	t_floor			floor;
 }					t_wolf;
 
