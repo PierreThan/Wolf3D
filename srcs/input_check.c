@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:34:31 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/23 15:36:53 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/02/18 14:18:50 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int		get_dimensions(t_wolf *wolf)
 		ret[1] = get_nbr_per_line(line);
 		if (i == 1 && ret[1])
 			wolf->width = ret[1];
-		else if (ret[1] == 0 || ret[1] != wolf->width)
+		else if (ret[1] != wolf->width)
+			return (0);
+		else if (ret[1] == 0)
 			close(wolf->fd);
 		wolf->height++;
 	}
@@ -122,8 +124,10 @@ int		parse_file(t_wolf *wolf, char **argv)
 			(char **)ft_memalloc(wolf->width * sizeof(char *))))
 		return (0);
 	while (++i < wolf->width)
+	{
 		if (!(wolf->map[i] = ft_strnew(wolf->height)))
 			return (0);
+	}
 	if (get_file(wolf, argv) == 0)
 	{
 		ft_printf("parsing problem\n");

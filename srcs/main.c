@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:43:52 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/23 15:56:51 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/02/18 14:20:41 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,11 @@ int			main(int ac, char **argv)
 	wolf.player.dir.x = 1;
 	if (check_input(ac, argv, &wolf) == 0)
 		return (free_wolf(&wolf));
+	if (check_border(&wolf) == 0)
+	{
+		ft_printf("No 0 on border pls, nobody wants to fall !\n");
+		return (free_wolf(&wolf));
+	}
 	if (ft_display_window("wolf", &wolf) == 0)
 		return (free_wolf(&wolf));
 	init_texture(&wolf);

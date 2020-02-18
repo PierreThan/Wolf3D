@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:32:38 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/23 15:34:04 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/02/18 14:17:33 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,24 @@ int		init_player(t_wolf *wolf)
 		}
 	}
 	return (0);
+}
+
+int		check_border(t_wolf *wolf)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < wolf->width)
+	{
+		j = -1;
+		while (++j < wolf->height)
+		{
+			if (i == 0 || j == 0 || i == wolf->width - 1 || j == wolf->height
+			- 1)
+				if (wolf->map[i][j] < '1')
+					return (0);
+		}
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: pthan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 17:50:40 by pthan             #+#    #+#             */
-/*   Updated: 2020/02/04 16:16:02 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/02/18 13:49:22 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void			floor_ceiling(t_wolf *wolf);
 
 int				init_player(t_wolf *wolf);
 int				parse_file(t_wolf *wolf, char **argv);
+int				check_border(t_wolf *wolf);
 
 /*
 **		mlx.c
