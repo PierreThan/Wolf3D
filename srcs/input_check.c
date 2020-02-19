@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 15:34:31 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/02/18 14:18:50 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/02/19 15:20:43 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ int		get_dimensions(t_wolf *wolf)
 		ret[1] = get_nbr_per_line(line);
 		if (i == 1 && ret[1])
 			wolf->width = ret[1];
-		else if (ret[1] != wolf->width)
-			return (0);
-		else if (ret[1] == 0)
+		else if (ret[1] != wolf->width || ret[1] == 0)
+		{
 			close(wolf->fd);
+			return (0);
+		}
 		wolf->height++;
 	}
 	if (ret[0] <= 0)
