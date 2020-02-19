@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/01/23 16:09:52 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/02/19 15:50:08 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void		ray_casting(t_wolf *wolf)
 		init_ray(wolf, &ray, x, cam_x);
 		sending_laser_beam(wolf, &ray);
 		init_wall(wolf, &ray, &wall);
+		//floor_ceiling(wolf);
 		textures(wolf, &ray, &wall, x);
 	}
 	mlx_put_image_to_window(wolf->mlx.mlx_ptr
