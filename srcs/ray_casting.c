@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/02/19 15:50:08 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/02/20 16:54:06 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		init_wall(t_wolf *wolf, t_ray *ray, t_wall *wall)
 {
 	int		h;
 
-	h = 400;
+	h = 480;
 	if (ray->side == 0)
 		ray->perpwalldist = (ray->mapx - wolf->player.pos.x
 			+ (1 - ray->stepx) / 2) / ray->dir.x;
@@ -83,7 +83,7 @@ void		init_wall(t_wolf *wolf, t_ray *ray, t_wall *wall)
 
 static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 {
-	wolf->texture.h = 400;
+	wolf->texture.h = 480;
 	wolf->texture.text_num = wolf->map[ray->mapx][ray->mapy] - 49;
 	if (ray->side == 0)
 		wall->x_wall = wolf->player.pos.y + ray->perpwalldist * ray->dir.y;
@@ -136,12 +136,12 @@ void		ray_casting(t_wolf *wolf)
 	wolf->mlx.img.data =
 	(int *)mlx_get_data_addr(wolf->mlx.img.ptr, &(wolf->mlx.img.bpp),
 					&(wolf->mlx.img.size_l), &(wolf->mlx.img.endian));
+	floor_ceiling(wolf);
 	while (++x < WIDTH)
 	{
 		init_ray(wolf, &ray, x, cam_x);
 		sending_laser_beam(wolf, &ray);
 		init_wall(wolf, &ray, &wall);
-		//floor_ceiling(wolf);
 		textures(wolf, &ray, &wall, x);
 	}
 	mlx_put_image_to_window(wolf->mlx.mlx_ptr

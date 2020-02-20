@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:31:26 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/02/19 15:37:39 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/02/20 15:56:20 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,14 @@ static void		draw_floor(t_wolf *wolf, int y)
 			- wolf->floor.cell_y)) & (TEXT_HEIGHT - 1);
 		wolf->floor.floor_x += wolf->floor.floorstep_x;
 		wolf->floor.floor_y += wolf->floor.floorstep_y;
-/*		wolf->floor.floor_text = ;
-		wolf->floor.ceiling_text = ;*/
-		wolf->floor.color = 11111000/*texture[wolf->floor.floor_text][TEXT_WIDTH
-			* wolf->floor.t_y + wolf->floor.t_x]*/;
+		wolf->floor.color = wolf->texture.img[2].data[TEXT_WIDTH
+			* wolf->floor.t_y + wolf->floor.t_x];
 		wolf->floor.color = (wolf->floor.color >> 1) & 8355711;
-		wolf->mlx.img.data[x * WIDTH + y] = wolf->floor.color;
-		wolf->floor.color = 10111000/*texture[wolf->floor.ceiling_text][TEXT_WIDTH
-			* wolf->floor.t_y + wolf->floor.t_x]*/;
+		wolf->mlx.img.data[y * WIDTH + x] = wolf->floor.color;
+		wolf->floor.color = wolf->texture.img[3].data[TEXT_WIDTH
+			* wolf->floor.t_y + wolf->floor.t_x];
 		wolf->floor.color = (wolf->floor.color >> 1) & 8355711;
-		wolf->mlx.img.data[x * WIDTH - y] = wolf->floor.color;
+		wolf->mlx.img.data[(HEIGHT - y - 1) * WIDTH + x] = wolf->floor.color;
 	}
 }
 
@@ -44,7 +42,7 @@ void			floor_ceiling(t_wolf *wolf)
 {
 	int		y;
 
-	y = 0;
+	y = -1;
 	wolf->texture.h = 400;
 	while (++y < wolf->texture.h)
 	{
