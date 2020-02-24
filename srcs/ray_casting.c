@@ -107,7 +107,6 @@ static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 		if (ray->side == 1)
 			wolf->texture.color = (wolf->texture.color >> 1) & 8355711;
 		wolf->mlx.img.data[wolf->texture.y * WIDTH + x] = wolf->texture.color;
-		(void)x;
 	}
 }
 

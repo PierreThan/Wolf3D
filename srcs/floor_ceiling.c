@@ -43,7 +43,7 @@ void			floor_ceiling(t_wolf *wolf)
 	int		y;
 
 	y = -1;
-	wolf->texture.h = 400;
+	wolf->texture.h = 480;
 	while (++y < wolf->texture.h)
 	{
 		wolf->floor.ray_dir_x0 = wolf->player.dir.x - wolf->player.plane.x;

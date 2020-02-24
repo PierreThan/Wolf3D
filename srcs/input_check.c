@@ -73,7 +73,6 @@ void	get_line(t_wolf *wolf, char *line, int j)
 	k = 0;
 	while (line && line[k])
 	{
-		//if (ft_isdigit(line[k]) && (line[k] <= (char)(48 + (int)NB_TEXTURES)))
 		if (ft_isdigit(line[k]))
 		{
 			wolf->map[i][j] = line[k];
@@ -121,8 +120,7 @@ int		parse_file(t_wolf *wolf, char **argv)
 		ft_printf("wrong file format\n");
 		return (0);
 	}
-	if (!(wolf->map =
-			(char **)ft_memalloc(wolf->width * sizeof(char *))))
+	if (!(wolf->map = (char **)ft_memalloc(wolf->width * sizeof(char *))))
 		return (0);
 	while (++i < wolf->width)
 	{

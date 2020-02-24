@@ -14,8 +14,8 @@
 
 int		init_player(t_wolf *wolf)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = -1;
 	while (++i < wolf->width)
