@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 14:46:34 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/02/20 16:54:06 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/02/27 16:34:35 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 		|| (ray->side == 1 && ray->dir.y < 0))
 		wolf->texture.x_text = TEXT_WIDTH - wolf->texture.x_text - 1;
 	wolf->texture.y = wall->draw_start - 1;
-	while (++wolf->texture.y < wall->draw_end)
+	while (wolf->texture.y < wall->draw_end)
 	{
 		wolf->texture.d = wolf->texture.y * 256
 			- wolf->texture.h * 128 + wall->line_height * 128;
