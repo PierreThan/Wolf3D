@@ -81,6 +81,13 @@ void		init_wall(t_wolf *wolf, t_ray *ray, t_wall *wall)
 		wall->draw_end = h - 1;
 }
 
+int			max(int a, int b)
+{
+	if (a < b)
+		return (b);
+	return(a);
+}
+
 static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 {
 	wolf->texture.h = 480;
@@ -99,8 +106,8 @@ static void	textures(t_wolf *wolf, t_ray *ray, t_wall *wall, int x)
 	{
 		wolf->texture.d = wolf->texture.y * 256
 			- wolf->texture.h * 128 + wall->line_height * 128;
-		wolf->texture.y_text = ((wolf->texture.d * TEXT_HEIGHT)
-			/ wall->line_height) / 256;
+		wolf->texture.y_text = max((((wolf->texture.d * TEXT_HEIGHT)
+			/ wall->line_height) / 256), 0);
 		wolf->texture.color =
 			wolf->texture.img[wolf->texture.text_num].data[TEXT_HEIGHT
 				* wolf->texture.y_text + wolf->texture.x_text];
