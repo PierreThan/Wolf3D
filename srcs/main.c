@@ -65,13 +65,7 @@ void		init_wolf(t_wolf *wolf)
 	wolf->fd = 0;
 	wolf->height = 0;
 	wolf->width = 0;
-	wolf->player.pos.x = 0;
-	wolf->player.pos.y = 0;
-	wolf->player.dir.x = 100;
-	wolf->player.dir.y = 1;
-	wolf->player.plane.x = 0;
-	wolf->player.plane.y = 0;
-	wolf->move_speed = 0.07;
+	wolf->move_speed = 0.5;
 	wolf->rot_speed = 0.035;
 }
 
@@ -80,7 +74,6 @@ int			main(int ac, char **argv)
 	t_wolf	wolf;
 
 	init_wolf(&wolf);
-	wolf.player.dir.x = 1;
 	if (check_input(ac, argv, &wolf) == 0)
 		return (free_wolf(&wolf));
 	if (check_border(&wolf) == 0)

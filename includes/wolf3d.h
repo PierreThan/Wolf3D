@@ -27,6 +27,7 @@
 # define BLUE 0x1152CB
 # define TEXT_HEIGHT 64
 # define TEXT_WIDTH 64
+# define NB_TEXTURES 8
 
 /*
 ** define BRICK "./xpm_textures/brick.xpm" = 1

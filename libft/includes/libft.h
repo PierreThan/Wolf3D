@@ -48,6 +48,7 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_lstnew(void const *content, size_t content_size);
 
+int					ft_max(int a, int b);
 void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);

@@ -13,8 +13,6 @@
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
-# define NB_TEXTURES 8
-
 typedef struct		s_img
 {
 	int				size_l;

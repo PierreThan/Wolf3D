@@ -122,17 +122,21 @@ int		parse_file(t_wolf *wolf, char **argv)
 	}
 	if (!(wolf->map = (char **)ft_memalloc(wolf->width * sizeof(char *))))
 		return (0);
+	printf("a");
 	while (++i < wolf->width)
 	{
 		if (!(wolf->map[i] = ft_strnew(wolf->height)))
 			return (0);
 	}
+	printf("b");
 	if (get_file(wolf, argv) == 0)
 	{
 		ft_printf("parsing problem\n");
 		return (0);
 	}
+	printf("c");
 	if (init_player(wolf))
 		return (1);
+	printf("d");
 	return (0);
 }

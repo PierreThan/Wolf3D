@@ -59,6 +59,7 @@ SRC_NAME 	=	ft_atoi.c									\
 				ft_lstnew.c									\
 				ft_lstreverse.c								\
 				ft_lstsize.c								\
+				ft_max.c									\
 				ft_memalloc.c								\
 				ft_memccpy.c								\
 				ft_memchr.c									\
