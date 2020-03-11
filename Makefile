@@ -21,6 +21,7 @@ CFLAGS			= -Wall -Wextra -Werror -Iincludes
 MLX				= -lmlx -framework OpenGL -framework AppKit
 SRC_NAME		= 	main.c \
 					input_check.c \
+					controls.c \
 					mlx.c \
 					vector2d.c \
 					ray_casting.c \

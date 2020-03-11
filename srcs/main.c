@@ -65,8 +65,8 @@ void		init_wolf(t_wolf *wolf)
 	wolf->fd = 0;
 	wolf->height = 0;
 	wolf->width = 0;
-	wolf->move_speed = 0.205;
-	wolf->rot_speed = 0.035;
+	wolf->move_speed = 0.20;
+	wolf->rot_speed = 0.04;
 }
 
 int			main(int ac, char **argv)
