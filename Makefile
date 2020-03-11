@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= wolf
+NAME			= wolf3d
 LIB				= ./libft/
 LDFLAGS			= -Llibft
 LDLIBS			= -lft

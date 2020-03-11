@@ -65,7 +65,7 @@ void		init_wolf(t_wolf *wolf)
 	wolf->fd = 0;
 	wolf->height = 0;
 	wolf->width = 0;
-	wolf->move_speed = 0.5;
+	wolf->move_speed = 0.205;
 	wolf->rot_speed = 0.035;
 }
 
@@ -73,7 +73,8 @@ int			main(int ac, char **argv)
 {
 	t_wolf	wolf;
 
-	init_wolf(&wolf);
+	if (ac == 2)
+		init_wolf(&wolf);
 	if (check_input(ac, argv, &wolf) == 0)
 		return (free_wolf(&wolf));
 	if (check_border(&wolf) == 0)

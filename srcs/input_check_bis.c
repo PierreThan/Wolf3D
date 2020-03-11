@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../includes/wolf3d.h>
+#include "../includes/wolf3d.h"
 
 int		init_player(t_wolf *wolf)
 {
