@@ -38,61 +38,6 @@ int		ft_display_window(char *title, t_wolf *wolf)
 	return (0);
 }
 
-void	move(int key, t_wolf *wolf)
-{
-	int	nex;
-	int	ney;
-
-	if (key == ARROW_UP)
-	{
-		nex = (int)(wolf->player.pos.x + wolf->player.dir.x * wolf->move_speed);
-		ney = (int)(wolf->player.pos.y + wolf->player.dir.y * wolf->move_speed);
-		if (wolf->map[nex][(int)wolf->player.pos.y] == '0')
-			wolf->player.pos.x += wolf->player.dir.x * wolf->move_speed;
-		if (wolf->map[(int)wolf->player.pos.x][ney] == '0')
-			wolf->player.pos.y += wolf->player.dir.y * wolf->move_speed;
-	}
-	else if (key == ARROW_DOWN)
-	{
-		nex = (int)(wolf->player.pos.x - wolf->player.dir.x * wolf->move_speed);
-		ney = (int)(wolf->player.pos.y - wolf->player.dir.y * wolf->move_speed);
-		if (wolf->map[nex][(int)wolf->player.pos.y] == '0')
-			wolf->player.pos.x -= wolf->player.dir.x * wolf->move_speed;
-		if (wolf->map[(int)wolf->player.pos.x][ney] == '0')
-			wolf->player.pos.y -= wolf->player.dir.y * wolf->move_speed;
-	}
-	ray_casting(wolf);
-}
-
-void	rotate(int key, t_wolf *wolf, double old_dir_x, double old_plane_x)
-{
-	old_dir_x = wolf->player.dir.x;
-	old_plane_x = wolf->player.plane.x;
-	if (key == ARROW_LEFT)
-	{
-		wolf->player.dir.x = wolf->player.dir.x * cos(-wolf->rot_speed)
-			- wolf->player.dir.y * sin(-wolf->rot_speed);
-		wolf->player.dir.y = old_dir_x * sin(-wolf->rot_speed)
-			+ wolf->player.dir.y * cos(-wolf->rot_speed);
-		wolf->player.plane.x = wolf->player.plane.x * cos(-wolf->rot_speed)
-			- wolf->player.plane.y * sin(-wolf->rot_speed);
-		wolf->player.plane.y = old_plane_x * sin(-wolf->rot_speed)
-			+ wolf->player.plane.y * cos(-wolf->rot_speed);
-	}
-	else if (key == ARROW_RIGHT)
-	{
-		wolf->player.dir.x = wolf->player.dir.x * cos(wolf->rot_speed)
-			- wolf->player.dir.y * sin(wolf->rot_speed);
-		wolf->player.dir.y = old_dir_x * sin(wolf->rot_speed)
-			+ wolf->player.dir.y * cos(wolf->rot_speed);
-		wolf->player.plane.x = wolf->player.plane.x * cos(wolf->rot_speed)
-			- wolf->player.plane.y * sin(wolf->rot_speed);
-		wolf->player.plane.y = old_plane_x * sin(wolf->rot_speed)
-			+ wolf->player.plane.y * cos(wolf->rot_speed);
-	}
-	ray_casting(wolf);
-}
-
 int		key_press(int key, void *param)
 {
 	t_wolf	*wolf;
@@ -104,9 +49,11 @@ int		key_press(int key, void *param)
 	wolf = (t_wolf *)param;
 	if (key == MAIN_PAD_ESC)
 		close_wolf(wolf);
-	else if (key == ARROW_UP || key == ARROW_DOWN)
+	else if (key == ARROW_UP || key == ARROW_DOWN ||
+			key == MAIN_PAD_W || key == MAIN_PAD_S)
 		move(key, wolf);
-	else if (key == ARROW_LEFT || key == ARROW_RIGHT)
+	else if (key == ARROW_LEFT || key == ARROW_RIGHT ||
+			key == MAIN_PAD_A || key == MAIN_PAD_D)
 		rotate(key, wolf, old_dir_x, old_plane_x);
 	return (0);
 }
