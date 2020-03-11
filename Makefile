@@ -17,7 +17,7 @@ LDLIBS			= -lft
 SRC_PATH		= srcs
 OBJ_PATH		= objs
 CC				= gcc
-CFLAGS			= -Wall -Wextra -Werror -Iincludes -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -Iincludes
 MLX				= -lmlx -framework OpenGL -framework AppKit
 SRC_NAME		= 	main.c \
 					input_check.c \

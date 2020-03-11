@@ -45,6 +45,7 @@ int		get_dimensions(t_wolf *wolf)
 	while (++i && (ret[0] = get_next_line(wolf->fd, &line) > 0))
 	{
 		ret[1] = get_nbr_per_line(line);
+		ft_strdel(&line);
 		if (i == 1 && ret[1])
 			wolf->width = ret[1];
 		else if (ret[1] != wolf->width || ret[1] == 0)
@@ -56,12 +57,11 @@ int		get_dimensions(t_wolf *wolf)
 	}
 	if (ret[0] <= 0)
 		close(wolf->fd);
-	if (!ret[0])
+	if (!ret[0] && line)
 		ft_strdel(&line);
 	if (ret[0] < 0 || (!ret[0] && !wolf->width && !wolf->height))
 		return (0);
-	else
-		return (1);
+	return (1);
 }
 
 void	get_line(t_wolf *wolf, char *line, int j)
