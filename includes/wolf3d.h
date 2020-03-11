@@ -83,8 +83,9 @@ int				check_border(t_wolf *wolf);
 **		controls.c
 */
 
-void            move(int key, t_wolf *wolf);
-void            rotate(int key, t_wolf *wolf, double old_dir_x, double old_plane_x);
+void			move(int key, t_wolf *wolf);
+void			rotate(int key, t_wolf *wolf,
+						double old_dir_x, double old_plane_x);
 
 /*
 **		mlx.c
