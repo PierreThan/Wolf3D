@@ -92,7 +92,7 @@ int		get_file(t_wolf *wolf, char **argv)
 
 	if ((wolf->fd = open(argv[1], O_RDONLY)) < 0)
 	{
-		ft_printf("usage error\n");
+		ft_putstr("usage error\n");
 		return (0);
 	}
 	j = 0;
@@ -117,7 +117,7 @@ int		parse_file(t_wolf *wolf, char **argv)
 	wolf->width = 0;
 	if (!get_dimensions(wolf))
 	{
-		ft_printf("wrong file format\n");
+		ft_putstr("wrong file format\n");
 		return (0);
 	}
 	if (!(wolf->map = (char **)ft_memalloc(wolf->width * sizeof(char *))))
@@ -129,7 +129,7 @@ int		parse_file(t_wolf *wolf, char **argv)
 	}
 	if (get_file(wolf, argv) == 0)
 	{
-		ft_printf("parsing problem\n");
+		ft_putstr("parsing problem\n");
 		return (0);
 	}
 	if (init_player(wolf))

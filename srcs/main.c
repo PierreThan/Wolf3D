@@ -18,12 +18,12 @@ static int	check_input(int ac, char **argv, t_wolf *wolf)
 	{
 		if ((wolf->fd = open(argv[1], O_RDONLY)) < 0)
 		{
-			ft_printf("usage error\n");
+			ft_putstr("usage error\n");
 			return (0);
 		}
 		return (parse_file(wolf, argv));
 	}
-	ft_printf("usage error");
+	ft_putstr("usage error");
 	return (0);
 }
 
@@ -79,7 +79,7 @@ int			main(int ac, char **argv)
 		return (free_wolf(&wolf));
 	if (check_border(&wolf) == 0)
 	{
-		ft_printf("No 0 on border pls, nobody wants to fall !\n");
+		ft_putstr("No 0 on border pls, nobody wants to fall !\n");
 		return (free_wolf(&wolf));
 	}
 	if (ft_display_window("wolf", &wolf) == 0)
