@@ -22,8 +22,6 @@ LIBFLAGS = -Iincludes
 
 SRC_PATH	= srcs
 
-PRINTF_PATH = ft_printf
-
 CONV_PATH 	= convs
 
 UTILS_PATH  = utils
@@ -106,28 +104,6 @@ SRC_NAME 	=	ft_atoi.c									\
 				ft_tolower.c								\
 				ft_toupper.c								\
 				get_next_line.c								\
-				$(PRINTF_PATH)/$(CONV_PATH)/cast_nbrs.c		\
-				$(PRINTF_PATH)/$(CONV_PATH)/char_strings.c	\
-				$(PRINTF_PATH)/$(CONV_PATH)/float_args.c	\
-				$(PRINTF_PATH)/$(CONV_PATH)/float.c			\
-				$(PRINTF_PATH)/$(CONV_PATH)/numbers.c		\
-				$(PRINTF_PATH)/$(CONV_PATH)/pct_ptr.c		\
-				$(PRINTF_PATH)/$(CONV_PATH)/pct_ptr.c		\
-				$(PRINTF_PATH)/$(SRC_PATH)/buffer.c			\
-				$(PRINTF_PATH)/$(SRC_PATH)/check_flag_pad.c \
-				$(PRINTF_PATH)/$(SRC_PATH)/conv_specifiers.c\
-				$(PRINTF_PATH)/$(SRC_PATH)/ft_printf.c		\
-				$(PRINTF_PATH)/$(SRC_PATH)/padding.c		\
-				$(PRINTF_PATH)/$(SRC_PATH)/parse_args.c		\
-				$(PRINTF_PATH)/$(UTILS_PATH)/find_conv.c	\
-				$(PRINTF_PATH)/$(UTILS_PATH)/find_flag.c	\
-				$(PRINTF_PATH)/$(UTILS_PATH)/ft_get_wchar.c \
-				$(PRINTF_PATH)/$(UTILS_PATH)/ft_lltoa_base.c\
-				$(PRINTF_PATH)/$(UTILS_PATH)/ft_nbrlen.c	\
-				$(PRINTF_PATH)/$(UTILS_PATH)/ft_wcharlen.c 	\
-				$(PRINTF_PATH)/$(UTILS_PATH)/ft_wstrlen.c 	\
-				$(PRINTF_PATH)/$(UTILS_PATH)/maths.c		\
-				$(PRINTF_PATH)/$(UTILS_PATH)/to_upper.c		\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -170,10 +146,6 @@ re				: 	fclean all
 # Compilation rules
 $(OBJ_PATH)		:
 					@mkdir $(OBJ_PATH) 2> /dev/null || true
-					@mkdir $(OBJ_PATH)/$(PRINTF_PATH) 2> /dev/null || true
-					@mkdir $(OBJ_PATH)/$(PRINTF_PATH)/$(CONV_PATH) 2> /dev/null || true
-					@mkdir $(OBJ_PATH)/$(PRINTF_PATH)/$(SRC_PATH) 2> /dev/null || true
-					@mkdir $(OBJ_PATH)/$(PRINTF_PATH)/$(UTILS_PATH) 2> /dev/null || true
 
 $(NAME)			:	$(OBJ)
 					@ar rc $(NAME)  $(OBJ)

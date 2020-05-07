@@ -16,9 +16,9 @@ LDFLAGS			= -Llibft
 LDLIBS			= -lft
 SRC_PATH		= srcs
 OBJ_PATH		= objs
-CC				= gcc
+CC				= clang
 CFLAGS			= -Wall -Wextra -Werror -Iincludes
-MLX				= -lmlx -framework OpenGL -framework AppKit
+MLX				= -lmlx -lm -lXext -lX11 -IOGL -lbsd
 SRC_NAME		= 	main.c \
 					input_check.c \
 					controls.c \
