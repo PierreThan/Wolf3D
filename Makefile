@@ -18,7 +18,7 @@ SRC_PATH		= srcs
 OBJ_PATH		= objs
 CC				= clang
 CFLAGS			= -Wall -Wextra -Werror -Iincludes
-MLX				= -lmlx -lm -lXext -lX11 -IOGL -lbsd
+MLX				= -L minilibx_linux -lmlx -I minilibx_linux -lm -lXext -lX11 -lbsd
 SRC_NAME		= 	main.c \
 					input_check.c \
 					controls.c \

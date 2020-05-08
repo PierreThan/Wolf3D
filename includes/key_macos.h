@@ -22,12 +22,24 @@
 # define MOUSE_SCROLL_LEFT	6
 # define MOUSE_SCROLL_RIGHT	7
 
-# define ARROW_UP			126
-# define ARROW_DOWN			125
-# define ARROW_LEFT			123
-# define ARROW_RIGHT		124
+# define ARROW_UP			65362
+# define ARROW_DOWN			65364
+# define ARROW_LEFT			65361
+# define ARROW_RIGHT			65363
 
+# define HOOK_KEY_DOWN  		2
+# define HOOK_KEY_UP	    		3
+# define HOOK_MOUSE_DOWN		4
+# define HOOK_MOUSE_UP	    		5
+# define HOOK_MOUSE_MOVE		6
+# define HOOK_EXPOSE			12
+# define HOOK_CLOSE	    		17
 # define NUM_PAD_0			82
+# define KEY_P		    		112
+# define KEY_Q			    	113
+# define DISPLAY_DOT			1u
+# define RENDER             		2u
+
 # define NUM_PAD_1			83
 # define NUM_PAD_2			84
 # define NUM_PAD_3			85
@@ -40,13 +52,13 @@
 # define NUM_PAD_PLUS		69
 # define NUM_PAD_MINUS		78
 
-# define MAIN_PAD_ESC		53
-# define MAIN_PAD_A			0
+# define MAIN_PAD_ESC			65307
+# define MAIN_PAD_A			113
 # define MAIN_PAD_Q			12
-# define MAIN_PAD_W			13
+# define MAIN_PAD_W			122
 # define MAIN_PAD_E			14
-# define MAIN_PAD_D			2
-# define MAIN_PAD_S			1
+# define MAIN_PAD_D			100
+# define MAIN_PAD_S			115
 # define MAIN_PAD_I			34
 # define MAIN_PAD_P			35
 # define MAIN_PAD_0			29

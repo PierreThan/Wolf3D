@@ -47,7 +47,7 @@ int		key_press(int key, void *param)
 	old_dir_x = 0.0;
 	old_plane_x = 0.0;
 	wolf = (t_wolf *)param;
-	if (key == MAIN_PAD_ESC)
+	if (key == MAIN_PAD_ESC || key == HOOK_CLOSE)
 		close_wolf(wolf);
 	else if (key == ARROW_UP || key == ARROW_DOWN ||
 			key == MAIN_PAD_W || key == MAIN_PAD_S)
@@ -60,10 +60,6 @@ int		key_press(int key, void *param)
 
 void	setup_controls(t_wolf *wolf)
 {
-	mlx_hook(wolf->mlx.win_ptr, 2, 0, key_press, wolf);
-	mlx_hook(wolf->mlx.win_ptr, 17, 0, close_wolf, wolf);
+	mlx_hook(wolf->mlx.win_ptr, HOOK_KEY_DOWN, 1, key_press, wolf);
+	mlx_hook(wolf->mlx.win_ptr, HOOK_CLOSE, 1, close_wolf, wolf);
 }
-
-/*
-**mlx_hook(wolf->mlx.win_ptr, 4, 0, mouse_press, wolf);
-*/
