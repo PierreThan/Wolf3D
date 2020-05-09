@@ -51,7 +51,7 @@ int		check_border(t_wolf *wolf)
 		{
 			if (i == 0 || j == 0 || i == wolf->width - 1 || j == wolf->height
 			- 1)
-				if (wolf->map[i][j] < '1')
+				if (wolf->map[i][j] < '1' || wolf->map[i][j] == '8')
 					return (0);
 		}
 	}
