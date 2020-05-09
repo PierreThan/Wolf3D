@@ -18,6 +18,7 @@
 
 int		ft_display_window(char *title, t_wolf *wolf)
 {
+	wolf->displayed = 1;
 	if ((wolf->mlx.mlx_ptr = mlx_init()))
 	{
 		if ((wolf->mlx.win_ptr = mlx_new_window(wolf->mlx.mlx_ptr,

@@ -50,7 +50,7 @@ int			free_wolf(t_wolf *wolf)
 			ft_memdel((void **)(&(wolf->map)));
 		}
 		free_textures(wolf);
-		if (wolf->mlx.mlx_ptr)
+		if (wolf->displayed && wolf->mlx.mlx_ptr)
 		{
 			if (wolf->mlx.img.ptr)
 				mlx_destroy_image(wolf->mlx.mlx_ptr, wolf->mlx.img.ptr);
@@ -68,6 +68,7 @@ void		init_wolf(t_wolf *wolf)
 	wolf->width = 0;
 	wolf->move_speed = 0.20;
 	wolf->rot_speed = 0.04;
+	wolf->displayed = 0;
 }
 
 int			main(int ac, char **argv)

@@ -115,6 +115,7 @@ typedef struct		s_wolf
 	int				fd;
 	int				height;
 	int				width;
+	int				displayed;
 	char			**map;
 	double			move_speed;
 	double			rot_speed;
