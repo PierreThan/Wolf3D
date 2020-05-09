@@ -62,4 +62,5 @@ int		key_press(int key, void *param)
 void	setup_controls(t_wolf *wolf)
 {
 	mlx_hook(wolf->mlx.win_ptr, HOOK_KEY_DOWN, 1, key_press, wolf);
+	mlx_hook(wolf->mlx.win_ptr, DESTROY_NOTIFY, StructureNotifyMask, close_wolf2, wolf);
 }

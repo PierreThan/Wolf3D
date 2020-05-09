@@ -62,7 +62,7 @@
 
 int				free_wolf(t_wolf *wolf);
 int				close_wolf(void *param);
-
+int				close_wolf2(void *param);
 /*
 **		textures.c
 */
