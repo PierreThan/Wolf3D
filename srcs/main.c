@@ -35,14 +35,6 @@ int			close_wolf(void *param)
 	return (1);
 }
 
-int			close_wolf2(void *param)
-{
-	if (param)
-		(void)param;
-	exit(0);
-	return (1);
-}
-
 int			free_wolf(t_wolf *wolf)
 {
 	int		i;
