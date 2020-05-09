@@ -79,14 +79,14 @@ int			main(int ac, char **argv)
 		init_wolf(&wolf);
 	else
 	{
-		ft_putstr("usage error : one argument needed");
+		ft_putstr("usage error : one argument needed\n");
 		return (0);
 	}
 	if (check_input(ac, argv, &wolf) == 0)
 		return (free_wolf(&wolf));
 	if (check_border(&wolf) == 0)
 	{
-		ft_putstr("No 0 on border pls, nobody wants to fall !\n");
+		ft_putstr("Change border pls, nobody wants to fall !\n");
 		return (free_wolf(&wolf));
 	}
 	if (ft_display_window("wolf", &wolf) == 0)
