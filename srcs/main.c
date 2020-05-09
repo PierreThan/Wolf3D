@@ -29,7 +29,6 @@ static int	check_input(int ac, char **argv, t_wolf *wolf)
 
 int			close_wolf(void *param)
 {
-	printf("dans close_wolf\n");
 	free_wolf((t_wolf *)param);
 	(void)param;
 	exit(0);
@@ -40,7 +39,6 @@ int			free_wolf(t_wolf *wolf)
 {
 	int		i;
 
-	printf("dans close_wolf\n");
 	if (wolf)
 	{
 		if (wolf->map)
@@ -60,7 +58,6 @@ int			free_wolf(t_wolf *wolf)
 				mlx_destroy_window(wolf->mlx.mlx_ptr, wolf->mlx.win_ptr);
 		}
 	}
-	printf("fin de close_wolf\n");
 	return (0);
 }
 
@@ -95,9 +92,7 @@ int			main(int ac, char **argv)
 		return (free_wolf(&wolf));
 	init_texture(&wolf);
 	ray_casting(&wolf);
-	printf("apres ray casting\n");
 	setup_controls(&wolf);
-	printf("apres setup controle\n");
 	mlx_loop(wolf.mlx.mlx_ptr);
 	return (1);
 }
