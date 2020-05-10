@@ -23,11 +23,10 @@ SRC_NAME		= 	main.c \
 					input_check.c \
 					controls.c \
 					mlx.c \
-					vector2d.c \
+					vecdd.c \
 					ray_casting.c \
 					textures.c \
 					input_check_bis.c \
-					vector2d_bis.c \
 					floor_ceiling.c
 
 

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector2d.c                                         :+:      :+:    :+:   */
+/*   vecdd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,29 +12,29 @@
 
 #include "../includes/wolf3d.h"
 
-t_vec2d		*vec2d_create(double x, double y)
+t_vecdd		*vecdd_create(double x, double y)
 {
-	t_vec2d	*vect;
+	t_vecdd	*vect;
 
-	if (!(vect = ft_memalloc(sizeof(t_vec2d*))))
+	if (!(vect = ft_memalloc(sizeof(t_vecdd*))))
 		return (NULL);
 	vect->x = x;
 	vect->y = y;
 	return (vect);
 }
 
-t_vec2d		*vec2d_scalar_mult(t_vec2d a, double l)
+t_vecdd		*vecdd_scalar_mult(t_vecdd a, double l)
 {
-	t_vec2d	*vect;
+	t_vecdd	*vect;
 
-	if (!(vect = ft_memalloc(sizeof(t_vec2d*))))
+	if (!(vect = ft_memalloc(sizeof(t_vecdd*))))
 		return (NULL);
 	vect->x = l * a.x;
 	vect->y = l * a.y;
 	return (vect);
 }
 
-double		vect2d_dot(t_vec2d a, t_vec2d b)
+double		vect2d_dot(t_vecdd a, t_vecdd b)
 {
 	double	res;
 
@@ -42,18 +42,18 @@ double		vect2d_dot(t_vec2d a, t_vec2d b)
 	return (res);
 }
 
-t_vec2d		*vec2d_sum(t_vec2d a, t_vec2d b)
+t_vecdd		*vecdd_sum(t_vecdd a, t_vecdd b)
 {
-	t_vec2d	*vect;
+	t_vecdd	*vect;
 
-	if (!(vect = ft_memalloc(sizeof(t_vec2d*))))
+	if (!(vect = ft_memalloc(sizeof(t_vecdd*))))
 		return (NULL);
 	vect->x = a.x + b.x;
 	vect->y = a.y + b.y;
 	return (vect);
 }
 
-void		vec2d_normalize(t_vec2d *vect)
+void		vecdd_normalize(t_vecdd *vect)
 {
 	if (vect->x >= vect->y)
 	{

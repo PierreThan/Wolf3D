@@ -29,25 +29,17 @@ typedef struct		s_mlx
 	t_img			img;
 }					t_mlx;
 
-typedef struct		s_vector2d
+typedef struct		s_vecdd
 {
 	double			x;
 	double			y;
-}					t_vec2d;
-
-typedef struct		s_matrix2_2d
-{
-	double			a;
-	double			b;
-	double			c;
-	double			d;
-}					t_mat2d;
+}					t_vecdd;
 
 typedef struct		s_player
 {
-	t_vec2d			pos;
-	t_vec2d			dir;
-	t_vec2d			plane;
+	t_vecdd			pos;
+	t_vecdd			dir;
+	t_vecdd			plane;
 }					t_player;
 
 typedef struct		s_ray
@@ -59,11 +51,11 @@ typedef struct		s_ray
 	int				stepy;
 	int				side;
 	double			perpwalldist;
-	t_vec2d			pos;
-	t_vec2d			dir;
-	t_vec2d			sidedist;
-	t_vec2d			deltadist;
-	t_vec2d			end_in_map;
+	t_vecdd			pos;
+	t_vecdd			dir;
+	t_vecdd			sidedist;
+	t_vecdd			deltadist;
+	t_vecdd			end_in_map;
 }					t_ray;
 
 typedef struct		s_wall

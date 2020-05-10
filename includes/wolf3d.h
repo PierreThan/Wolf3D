@@ -95,14 +95,13 @@ int				ft_display_window(char *title, t_wolf *wolf);
 void			setup_controls(t_wolf *wolf);
 
 /*
-**		vector2d.c
+**		vecdd.c
 */
 
-t_vec2d			*vec2d_scalar_mult(t_vec2d a, double l);
-double			vect2d_dot(t_vec2d a, t_vec2d b);
-t_vec2d			*vec2d_sum(t_vec2d a, t_vec2d b);
-void			vec2d_normalize(t_vec2d *vect);
-void			vec2d_mat2d_mult(t_vec2d *vec, t_mat2d *mat);
+t_vecdd			*vecdd_scalar_mult(t_vecdd a, double l);
+double			vect2d_dot(t_vecdd a, t_vecdd b);
+t_vecdd			*vecdd_sum(t_vecdd a, t_vecdd b);
+void			vecdd_normalize(t_vecdd *vect);
 
 void			ray_casting(t_wolf *wolf);
 
