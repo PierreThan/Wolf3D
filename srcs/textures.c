@@ -23,15 +23,19 @@ void	init_texture3(t_wolf *wolf)
 	tmp = wolf->texture.img;
 	while (tmp && tmp->ptr != NULL)
 		tmp++;
+	tmp->ptr = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr, COLORSTONE, w, h);
+	tmp->data = (int*)mlx_get_data_addr(
+		tmp->ptr, &(tmp->bpp), &(tmp->size_l), &(tmp->endian));
+	tmp++;
 	tmp->ptr = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr, GREYSTONE, w, h);
 	tmp->data = (int*)mlx_get_data_addr(
 		tmp->ptr, &(tmp->bpp), &(tmp->size_l), &(tmp->endian));
 	tmp++;
-	tmp->ptr = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr, PURPLESTONE, w, h);
+	tmp->ptr = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr, BLUESTONE, w, h);
 	tmp->data = (int*)mlx_get_data_addr(
 		tmp->ptr, &(tmp->bpp), &(tmp->size_l), &(tmp->endian));
 	tmp++;
-	tmp->ptr = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr, WOOD, w, h);
+	tmp->ptr = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr, PURPLESTONE, w, h);
 	tmp->data = (int*)mlx_get_data_addr(
 		tmp->ptr, &(tmp->bpp), &(tmp->size_l), &(tmp->endian));
 }
@@ -55,11 +59,11 @@ void	init_texture2(t_wolf *wolf)
 	tmp->data = (int*)mlx_get_data_addr(
 		tmp->ptr, &(tmp->bpp), &(tmp->size_l), &(tmp->endian));
 	tmp++;
-	tmp->ptr = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr, MOSSY, w, h);
+	tmp->ptr = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr, WOOD, w, h);
 	tmp->data = (int*)mlx_get_data_addr(
 		tmp->ptr, &(tmp->bpp), &(tmp->size_l), &(tmp->endian));
 	tmp++;
-	tmp->ptr = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr, COLORSTONE, w, h);
+	tmp->ptr = mlx_xpm_file_to_image(wolf->mlx.mlx_ptr, MOSSY, w, h);
 	tmp->data = (int*)mlx_get_data_addr(
 		tmp->ptr, &(tmp->bpp), &(tmp->size_l), &(tmp->endian));
 	init_texture3(wolf);

@@ -87,14 +87,11 @@ int			main(int ac, char **argv)
 		return (free_wolf(&wolf));
 	if (init_texture(&wolf) == 0)
 	{
-		ft_putendl("Texture failed");
+		ft_putendl("Toi, t'as touché à nos textures, vilain");
 		return (free_wolf(&wolf));
 	}
-	printf("avant raycast\n");
 	ray_casting(&wolf);
-	printf("apres raycast\n");
 	setup_controls(&wolf);
-	printf("apres setup\n");
 	mlx_loop(wolf.mlx.mlx_ptr);
 	return (1);
 }
