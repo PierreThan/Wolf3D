@@ -34,20 +34,20 @@
 ** define REDBRICK "./xpm_textures/redbrick.xpm" = 2
 ** define WOOD "./xpm_textures/wood.xpm" = 3
 ** define MOSSY "./xpm_textures/mossy.xpm" = 4
-** define COLORSTONE "./xpm_textures/colorstone.xpm" = 5
+** define COLORSTON "./xpm_textures/colorstone.xpm" = 5
 ** define GREYSTONE "./xpm_textures/greystone.xpm" = 6
 ** define BLUESTONE "./xpm_textures/bluestone.xpm" = 7
-** efine PURPLESTONE "./xpm_textures/purplestone.xpm" = 8
+** define PURPLESTON "./xpm_textures/purplestone.xpm" = 8
 */
 
 # define BRICK "./xpm_textures/brick.xpm"
 # define REDBRICK "./xpm_textures/redbrick.xpm"
 # define WOOD "./xpm_textures/wood.xpm"
 # define MOSSY "./xpm_textures/mossy.xpm"
-# define COLORSTONE "./xpm_textures/colorstone.xpm"
+# define COLORSTON "./xpm_textures/colorstone.xpm"
 # define GREYSTONE "./xpm_textures/greystone.xpm"
 # define BLUESTONE "./xpm_textures/bluestone.xpm"
-# define PURPLESTONE "./xpm_textures/purplestone.xpm"
+# define PURPLESTO "./xpm_textures/purplestone.xpm"
 
 /*
 ** https://lodev.org/cgtutor/raycasting.html
