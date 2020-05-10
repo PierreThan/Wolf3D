@@ -52,7 +52,10 @@ int		check_border(t_wolf *wolf)
 			if (i == 0 || j == 0 || i == wolf->width - 1 || j == wolf->height
 			- 1)
 				if (wolf->map[i][j] < '1' || wolf->map[i][j] == '8')
+				{
+					ft_putendl("Change borders, noboby wants to fall !");
 					return (0);
+				}
 		}
 	}
 	return (1);

@@ -75,25 +75,26 @@ int			main(int ac, char **argv)
 {
 	t_wolf	wolf;
 
-	if (ac == 2)
-		init_wolf(&wolf);
-	else
+	if (ac != 2)
 	{
 		ft_putstr("usage error : one argument needed\n");
 		return (0);
 	}
-	if (check_input(ac, argv, &wolf) == 0)
+	init_wolf(&wolf);
+	if (check_input(ac, argv, &wolf) == 0 || check_border(&wolf) == 0)
 		return (free_wolf(&wolf));
-	if (check_border(&wolf) == 0)
-	{
-		ft_putstr("Change border pls, nobody wants to fall !\n");
-		return (free_wolf(&wolf));
-	}
 	if (ft_display_window("wolf", &wolf) == 0)
 		return (free_wolf(&wolf));
-	init_texture(&wolf);
+	if (init_texture(&wolf) == 0)
+	{
+		ft_putendl("Texture failed");
+		return (free_wolf(&wolf));
+	}
+	printf("avant raycast\n");
 	ray_casting(&wolf);
+	printf("apres raycast\n");
 	setup_controls(&wolf);
+	printf("apres setup\n");
 	mlx_loop(wolf.mlx.mlx_ptr);
 	return (1);
 }
