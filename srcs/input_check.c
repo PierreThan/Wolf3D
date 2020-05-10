@@ -23,6 +23,8 @@ int		get_nbr_per_line(char *str)
 		{
 			if (ft_isdigit(*str))
 			{
+				if (*str < '0' || *str > '8')
+					return (0);
 				str++;
 				nbr_per_line++;
 			}
